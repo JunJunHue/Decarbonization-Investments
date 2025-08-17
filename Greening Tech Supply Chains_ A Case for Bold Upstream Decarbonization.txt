@@ -1,0 +1,617 @@
+Greening Tech Supply Chains: A Case for Bold
+Upstream Decarbonization
+Introduction: The Next Frontier in Climate Leadership
+Major tech companies have set ambitious climate goals, but a critical gap remains: the heavy industrial
+materials underlying their products and infrastructure. Steel in data center racks, cement in office
+campuses, aluminum and copper in devices, and even rare earth minerals in electronics all carry a massive
+carbon footprint. Global cement production alone contributes about 8% of the world’s CO₂ emissions, and
+the iron & steel industry adds roughly another 7%. For many tech firms, upstream “Scope 3” emissions
+(from suppliers and raw materials) account for the vast majority of their carbon footprint. Yet typical
+strategies—like offsetting emissions, pressuring suppliers, or buying “green” credits—are incremental
+and insufficient in the face of the climate crisis. The world must cut greenhouse emissions 43% by 2030 to
+avert the worst outcomes, which demands transformative changes, not just efficiency tweaks.
+This whitepaper argues that hyperscale tech companies (Google, Microsoft, Meta, Apple, Amazon, etc.)
+should go beyond conventional Scope 3 management and invest upstream to decarbonize heavy
+industrial supply chains at the source. Instead of treating clean materials as someone else’s problem, tech
+giants can leverage their capital and influence to make steel, cement, aluminum, and other
+commodities green from the outset, fundamentally restructuring supply chains to align with climate
+goals. The sections below outline why this bold strategy is in tech’s strategic interest, provide historical
+proof that long-term bets can pay off, and detail how proactive upstream investment yields greater benefits
+than slow-paced, hands-off approaches. We also compare the risks of inaction versus the rewards of
+moving first, and draw lessons from how tech firms already became market makers for renewable energy
+—a precedent they can repeat for green commodities.
+
+Why Tech Needs to Invest Upstream: Beyond Financial ROI
+The case for upstream decarbonization isn’t only about direct returns on investment. It’s about strategic
+risk management, resilience, and leadership. By committing capital to decarbonize the production of
+materials their businesses rely on, hyperscalers can unlock multiple compelling benefits:
+• Regulatory Insulation & Risk Reduction: Environmental regulations are tightening worldwide, and
+companies that act now will be shielded from future shocks. For example, the EU’s new Carbon
+Border Adjustment Mechanism (CBAM) will impose costs on carbon-intensive imports like steel,
+cement, and aluminum starting in 2026 1 . Firms that fail to cut embedded emissions will pay a
+price, since they’ll need to purchase carbon certificates for dirty materials 2 . Proactive investment
+in green steel or cement today means avoiding these compliance costs and securing continued
+market access tomorrow. As PwC warns, with CBAM coming into effect, “the time to invest in your
+supply chain is now” to gain a competitive edge and avoid fines or loss of market share. In short,
+climate-proofing the supply chain is a form of insurance against carbon taxes, trade tariffs, and
+supply disruptions in a decarbonizing world.
+
+1
+
+• Reputational Gains & Brand Leadership: Tech firms pride themselves on innovation and positive
+impact. Bold climate action upstream enhances corporate reputation among consumers, investors,
+and talent. Customers and employees increasingly demand sustainability – a 2023 Deloitte
+survey found over 40% of Gen Z and Millennials have changed jobs or plan to due to climate
+concerns, and more than half research a company’s environmental policies before joining 3 . These
+generations also prefer sustainable products and brands. By visibly championing green steel or
+carbon-free aluminum in their products, tech companies strengthen their brands and trust. They
+send a powerful signal that they walk the talk on climate, earning goodwill that translates into
+customer loyalty and talent attraction. Climate leadership is no longer just CSR; it’s key to
+maintaining brand equity and attracting top engineers and employees who want to “make a
+difference”.
+• Control Over Climate Goal Attainment: Investing upstream gives companies direct control over
+emissions reductions that are otherwise outside their operational boundaries. Current Scope 3
+approaches often rely on encouraging suppliers to act or buying offsets – measures that are indirect
+and can be unreliable. Many suppliers, especially in industries like manufacturing or mining,
+operate on thin margins and cannot afford green technologies without help. Simply pushing the
+carbon problem onto them (or buying offsets of variable quality) is a shaky foundation for meeting
+science-based targets. By contrast, if a hyperscaler helps finance a green steel plant or a lowcarbon cement facility, it ensures a supply of climate-aligned materials and locks in real emissions
+reductions that directly further the company’s net-zero goals. This approach de-risks the path to
+climate targets – rather than hoping suppliers will cut 50% of their emissions by 2030, the company
+actively makes it happen. It’s a way of future-proofing the business, ensuring that achieving 2030
+or 2040 climate commitments is within the company’s own span of control.
+• Supply Chain Resilience & Security: As the climate and geopolitical landscape evolves, certain raw
+materials face new supply risks. Fossil-based commodity supply chains can be volatile – e.g. steel
+prices often swing with coal and electricity costs, and rare earth mining is concentrated in a few
+regions with environmental and political constraints. Investing in greener production (such as steel
+made with renewable energy or recycled materials, or recycling and novel mining for critical
+minerals) can diversify and stabilize supply sources. For instance, a green steel facility using electric
+arc furnaces and scrap metal not only cuts emissions but also reduces reliance on coal and long
+global transport routes. Similarly, supporting sustainable mining or recycling of rare earths can
+mitigate geopolitical dependencies. In essence, climate-aligned supply chains are more likely to
+be robust supply chains in the long run, with less exposure to fossil fuel price swings,
+environmental protests, or sudden regulatory bans. Early movers will have first pick of reliable green
+suppliers, while laggards could face shortages or expensive procurement down the line.
+• Innovation and First-Mover Advantage: By investing early, tech companies can help scale up
+innovative low-carbon technologies and gain preferential access or pricing. Whether it’s
+hydrogen-based steel, carbon-free aluminum smelting, low-clinker cement, or novel recycling
+techniques, many of these solutions are in pilot stage and need large customers to reach
+commercial scale. A hyperscaler that becomes a launch partner for such technology not only gets a
+seat at the table to shape product specifications to its needs, but may also negotiate long-term
+supply agreements at favorable rates. As green materials become mainstream, these companies will
+have a cost advantage and secure supply, while competitors scramble to procure limited green
+commodities. There’s also potential upside in developing new revenue streams – for example, a
+
+2
+
+consortium of tech firms investing in a green steel venture could see returns once it achieves scale
+and sells to the broader market. In the interim, any price premium on green materials can be
+absorbed by cash-rich tech firms (often the most profitable companies in history), especially
+considering that materials are usually a small fraction of product cost. (A 25% price premium on steel
+would raise the manufacturing cost of a car by only ~1%, and for many electronics or data centers the
+impact is similarly modest.) In short, investing upstream is an innovation play that positions tech
+companies as market makers with a competitive edge.
+Taken together, these incentives make a compelling case: decarbonizing the supply chain at its source is a
+strategic imperative, not just an environmental nicety. Tech giants can reduce regulatory and financial risk,
+enhance their brand, ensure they meet climate pledges, and build a resilient operation by pursuing a
+proactive upstream strategy. And importantly, they have the financial muscle to do so – unlike many
+suppliers, the hyperscalers can deploy capital at a scale that matches the $3.5 trillion per year
+investment the global net-zero transition requires. It is a classic case of using today’s resources to
+safeguard tomorrow’s business.
+
+Historical Precedents: Big Bets that Transformed Industries
+Skeptics might argue that investing heavily in decarbonizing commodities is too costly or outside a tech
+firm’s core business. However, history shows that industry leaders often win by making bold, long-term
+bets – even if those bets buck short-term financial thinking. Below we highlight several examples (from tech
+and beyond) where major players invested in long-term system transformations despite short-term
+costs, ultimately reaping transformative results:
+• Tech’s Renewable Energy Push (2010s): A decade ago, wind and solar power were more expensive
+and less developed. Yet companies like Google, Amazon, Microsoft, and Meta began signing longterm power purchase agreements (PPAs) for renewable energy, effectively paying a premium to
+kickstart a market for clean power. The results have been astounding: Corporate clean energy
+purchasing grew 100-fold in ten years, and even as demand surged, the cost of solar power fell
+~71% and wind by 47%, thanks to economies of scale. By 2022, over 300 companies had contracted
+77 GW of clean energy capacity – equivalent to powering 18 million U.S. homes – with tech firms
+leading the pack. Amazon, Meta, and Google are now the top three corporate clean power buyers.
+This early, voluntary investment not only gave the tech sector access to affordable renewable power
+for their operations, but also transformed the entire electricity industry, helping make
+renewables cost-competitive worldwide. The lesson: committed demand from big customers can
+rapidly scale nascent solutions, driving down costs for all. Tech companies can replicate this
+playbook for materials like green steel and cement, just as they did for wind and solar.
+• IBM’s “Bet-the-Business” System/360 (1964): In one of the boldest investments in tech history,
+IBM in the 1960s poured an unprecedented \$5 billion (over \$35 billion in today’s dollars) into
+developing the System/360 mainframe computer family. This was at a time when that sum exceeded
+IBM’s annual revenue, a true bet-the-company gamble. Many questioned the move, but the vision
+was to create a long-term platform standard for computing. The gamble paid off spectacularly: by
+1966, IBM was shipping 1,000 System/360 units per month at about \$3 million each, and the
+architecture became the de facto standard in computing for decades. IBM’s dominance of the IT
+industry for the rest of the 20th century was cemented by this decision to prioritize long-term
+innovation over short-term profit. The takeaway is that transformative change (in IBM’s case,
+
+3
+
+ushering in the era of compatible computer systems) often requires massive up-front investment –
+and those with the courage to make that investment can end up owning the future. In the context of
+climate, tech firms must be willing to “bet big” on re-inventing industrial processes; the ones that do
+could dominate their markets in a decarbonized economy.
+• Amazon’s Infrastructure-first Growth Strategy (2000s): Amazon famously spent years barely
+turning a profit – not because the business wasn’t successful, but because Jeff Bezos relentlessly
+reinvested revenue into long-term infrastructure: warehouses, distribution networks, cloud data
+centers, and more. In the late 1990s and early 2000s, Amazon focused on market share over
+immediate profit, plowing earnings into building logistics capacity and new services. In 1999, for
+example, Amazon’s sales hit a record \$1.6 billion, but the company spent all that and more
+expanding its fulfillment centers and capabilities. This strategy “paid off because it helped
+Amazon grow into a company that could handle millions of customers” in the years to come. By
+sacrificing short-term earnings, Amazon established an almost unassailable delivery network and
+also launched Amazon Web Services – both now pillars of its dominance. The short-term cost was
+immense (Amazon incurred losses in many early years), but the long-term payoff was
+transformative: today’s e-commerce and cloud computing landscapes are largely shaped by
+Amazon’s early investments. The clear parallel for decarbonization is that short-term costs can lead
+to long-term market leadership. Just as Amazon built the logistics backbone for modern retail by
+spending ahead, today’s tech giants can build the green backbone for tomorrow’s manufacturing
+and secure a stable, climate-aligned supply chain advantage that competitors will struggle to match.
+• Ørsted’s Clean Energy Pivot (2009–2019): Transformative investment isn’t limited to tech – consider
+Ørsted, the Danish energy company (formerly DONG Energy). In 2009, DONG was a profitable but
+coal-heavy utility (85% of its power from fossil fuels). That year, management made a radical
+decision: pivot to renewables, targeting 85% green energy and phasing out coal. Ørsted invested
+aggressively in offshore wind farms and new green capacity, even as it meant writing off existing
+assets and incurring short-term costs. The turnaround was faster and more successful than anyone
+imagined. By 2019 – 21 years ahead of the initial schedule – Ørsted had achieved 86% renewable
+generation and become the world’s largest offshore wind producer. This astounding transition
+from coal to wind power not only proved financially viable (Ørsted’s market value soared as it
+became a global renewables leader), but also helped transform the offshore wind industry from
+niche to mainstream. Ørsted’s story shows that even in “old” industries, bold leadership and
+upfront capital can reinvent a company and its sector. The takeaway for hyperscalers is that
+supporting a shift to climate-aligned production (even outside their traditional domain) can yield
+both tremendous environmental gains and business opportunities. As Ørsted did with wind energy,
+so can tech consortia do with green steel furnaces, sustainable concrete, or circular material
+systems – the result could be an industry turned on its head for the better.
+Each of these examples was “transformative” in hindsight, yet required uncommon vision at the outset:
+betting on unproven technologies or strategies, and weathering skepticism over the lack of immediate
+returns. In the same vein, investing in decarbonizing heavy industry is a visionary play. It may not boost
+next quarter’s earnings, but it can redefine markets and secure long-term success. Tech executives should
+recognize that they’ve done this before (with renewable energy, with cloud computing, etc.) – and now is the
+moment to do it again to tackle the climate impact of the physical infrastructure we all rely on.
+
+4
+
+Proactive Decarbonization vs. Incrementalism: The Strategic Case
+Relying on conventional Scope 3 tactics – nudging suppliers, purchasing carbon offsets, or waiting for
+cleaner options to appear – is fundamentally an incrementalist approach in a time that calls for
+exponential change. Here’s why a proactive upstream decarbonization strategy beats incremental
+supplier management or offsetting, both in effectiveness and in strategic value:
+• Real Emissions Reduction vs. Paper Accounting: Offsets and renewable energy certificates can
+only get companies so far, and their credibility is increasingly questioned. Many carbon offsets do
+not truly reduce atmospheric CO₂ (e.g. if not additional or if they risk reversal), and in any case,
+offsets are a zero-sum game – they shuffle emissions around rather than eliminate the source. By
+contrast, investing to produce low-carbon steel or cement directly eliminates emissions at the
+source. For example, financing a steel mill that uses green hydrogen instead of coal can cut 95% of
+CO₂ per ton of steel, a reduction no bookkeeping maneuver can achieve. A recent industry report
+noted that for buyers, few other Scope 3 measures offer the combination of such deep emissions
+abatement, near-term availability, and tangible added value as buying truly green materials. In
+short, proactive decarbonization tackles the problem head-on – your products literally contain less
+carbon, rather than claiming neutrality through offset math. This is strategically superior because it
+yields a supply chain that is objectively low-carbon, resilient to scrutiny, and aligned with global netzero pathways (rather than one dependent on yearly offset purchases of uncertain quality).
+• Speed and Scale of Impact: The climate clock is ticking, and incremental approaches are often too
+slow. Consider that if a tech company simply asks its myriad suppliers to each cut emissions 5–10%
+through efficiency, the aggregate impact might be marginal – and hard to verify – over the next 5–10
+years. In contrast, one big upstream project can move the needle significantly. For instance, a single
+green steel plant (on the order of 1 million tons/year capacity) replacing a conventional plant can
+avoid several million tons of CO₂ annually. Committing to buy (or invest in) such low-CO₂ steel at
+scale could enable 20+ million tons of green steel production by 2030, given the right
+conditions. Analysts emphasize that these volumes “will only be realized by 2030 if
+investment...takes place in the next five years”, and that delays now would make corporate
+climate targets “harder to reach”. In plain terms: proactive investment is the only way to achieve
+large-scale decarbonization on the 2030 timeline. Scope 3 supplier engagement, while necessary,
+is often too piecemeal and slow to aggregate into the needed cuts. Tech firms are used to thinking in
+terms of scalable platforms – here, the platform is a decarbonized materials ecosystem, which can only
+be built by front-loading support and capital.
+• Overcoming the “Green Premium” Barrier: One reason suppliers haven’t already decarbonized is
+the infamous “green premium” – cleaner processes can cost more (for now). Left to market forces, a
+steel maker has little incentive to build a plant that produces steel at, say, 20–40% higher cost. But
+this is precisely where hyperscalers can flex their muscle: by absorbing or helping pay that initial
+premium to unlock scale and learning-curve cost declines. History shows that today’s premium is
+tomorrow’s discount if we invest in scaling technology. Solar panels and batteries were once far
+costlier than incumbents; now they’re often cheaper, thanks to early adopters and production scaleup. Green industrial tech is poised for the same trajectory. Currently, green steel costs on average
+~40% more than conventional steel, but BloombergNEF projects that by 2050 it could actually
+cost 5% less than fossil-based steel as new processes mature. In other words, the green premium
+can flip to a green dividend – but only if we invest massively in deployment to bring costs
+
+5
+
+down. By partnering with steel, cement, or materials producers on first-of-a-kind projects, tech
+companies can effectively buy down the learning curve. This is superior to waiting a decade hoping
+prices drop on their own. Indeed, a coalition of buyers and producers (with policy support) could
+slash the green premium much sooner. The Energy Transitions Commission estimates that initial
+breakthrough steel projects will have a 15–40% cost premium per ton, which buyers will need to
+help cover – yet those extra costs can be temporary. The strategic play is to treat the green
+premium as an R&D investment in the supply chain, one that yields a competitive advantage when
+costs inevitably fall. In contrast, an incremental approach avoids paying any premium now but risks
+being stuck with higher costs or scarce supply later when regulations or markets demand lowcarbon materials. Proactivity lets companies shape the cost trajectory to their benefit.
+• Market Shaping vs. Following: A proactive strategy allows tech firms to shape standards and
+ecosystems in heavy industry rather than passively adapting later. If hyperscalers demand truly
+green steel and cement (and perhaps even co-develop certifications or technology with producers),
+they can set the bar for what “sustainable materials” means. This could drive industry-wide change –
+similar to how big tech companies influenced suppliers to adopt electronics recycling or renewable
+energy usage in the past. It also positions those companies as leaders sitting at the table with
+policymakers and industrial CEOs to design the future of these sectors. The alternative is to follow
+whatever slow path incumbents take, possibly ending up with patchwork solutions (like minimal
+recycled content or offset-labeled products that don’t fundamentally cut emissions). Strategically,
+becoming a market maker yields far more clout. It could even lead to new partnerships or
+business extensions (imagine a tech firm co-owning a share of a green materials venture, blending
+the lines between “tech” and “industry” – much as Tesla blurred “tech” and “auto” to its advantage). In
+summary, proactive decarbonization is an offensive strategy to create the market conditions you
+want, whereas incrementalism is a defensive strategy reacting to external pressures. Offense has the
+potential to create competitive moats; defense often just keeps you in the game.
+• Credibility with Stakeholders: As scrutiny of corporate climate claims intensifies, those who take
+concrete action will earn trust over those relying on accounting maneuvers. Investors are
+increasingly evaluating companies on climate risk and true decarbonization, not offset portfolios.
+Governments too, via procurement or policy, favor companies that genuinely cut emissions. For
+example, if public contracts or future ESG indexes demand proof of low embedded carbon, a
+company that can show “our products are made with 90% carbon-free steel and cement” will
+outshine one that says “we offset our supply chain emissions by planting trees.” Moreover,
+employees and the public are savvy – they know the difference between reducing emissions and
+outsourcing them. A proactive approach that delivers tangible outcomes (like partnering in the first
+carbon-neutral concrete batch for your new offices, or the first rare-earth magnet made without
+toxic processes) creates powerful storytelling and transparency. Strategically, this builds long-term
+goodwill and loyalty among all stakeholders, acting as a buffer against criticism. In contrast,
+incremental measures may lead to accusations of greenwashing or insufficient action, which can
+damage reputation and invite activist or regulatory intervention.
+In essence, proactive upstream decarbonization is the “Scope 4” strategy – acting beyond one’s own
+footprint to drive systemic change. It acknowledges that a hyperscaler’s responsibility (and opportunity)
+doesn’t end at the factory gate of a supplier; it extends to the very mines, mills, and smelters that shape our
+world. By taking the initiative to clean up those foundational processes, tech companies can achieve deeper
+emissions cuts faster, gain strategic advantages, and fulfill their climate commitments with confidence.
+
+6
+
+Incrementalism and offsets have been transitional tools; now it’s time for a more profound, architectural fix
+to the emissions embedded in our hardware and infrastructure.
+
+The Cost of Inaction: Comparing Risks and Rewards
+Bold action does carry costs – financial investment, organizational effort, perhaps the need to develop new
+expertise or partnerships. But inaction carries costs as well, often far greater and more irreversible.
+Here we compare the long-term benefits of proactive upstream decarbonization with the risks of slow
+movement or doing nothing:
+Long-Term Benefits of Bold Upstream Investment:
+- Secure, Climate-Aligned Supply Chains: Early investment in green commodity production ensures that a
+company’s future raw materials are secure from carbon-related disruptions. This means fewer surprises
+from carbon pricing, no scrambling to find compliant suppliers when new laws hit, and smooth operations
+in a carbon-constrained world. The company can operate knowing its key inputs (steel, cement, etc.) will
+remain available and affordable even as environmental regulations tighten, because it helped create the
+compliant capacity. Essentially, proactive investment “climate-proofs” the supply chain – an invaluable
+stability factor in the 2030s and 2040s.
+• Competitive Advantage & Market Leadership: Firms that move first set the industry agenda. By
+securing large volumes of green materials and possibly investing in IP or processes, a hyperscaler
+can enjoy preferential access and pricing when these commodities are in high demand later. They’ll
+also be the first to offer truly low-carbon products to a market that increasingly values sustainability.
+This differentiation can justify premium pricing or greater market share. For example, if Company A’s
+devices or cloud services are built on a carbon-neutral supply chain and Company B’s are not,
+sustainability-minded customers (including enterprise clients with their own net-zero goals) will
+gravitate toward A. Moreover, being a pioneer allows a company to build internal expertise in
+sustainability tech, which can become a consultancy or service in itself (some firms are already
+monetizing their renewable energy and carbon-management know-how). Overall, proactive
+decarbonization positions a company as the leader in responsible tech, attracting business and
+talent that follow that leadership.
+• Long-Term Cost Savings & Efficiency: While initial projects require capital, over the long run clean
+energy and processes can be cheaper and more efficient. Renewable electricity often costs less to
+operate than fossil energy. Green hydrogen and recycled materials, once scaled, could reduce
+exposure to volatile commodity prices (e.g., scrap-based electric-arc steel is not subject to coking
+coal supply issues). Additionally, by integrating vertically or contracting directly for materials,
+companies can cut out middlemen and possibly negotiate better rates. Consider Apple’s approach:
+by investing in carbon-free aluminum smelting, it not only slashes emissions but may eventually
+acquire aluminum at competitive cost without paying for carbon allowances or offsets. There’s also
+the benefit of avoiding future carbon taxes or penalties – an investment now is cheaper than a
+decade of paying for carbon-intensive inputs. In short, today’s expenditure can be seen as buying an
+annuity of future savings under a carbon-priced economy. Furthermore, many decarbonization
+measures have co-benefits like improved energy efficiency or reduced waste, which inherently lower
+operating costs over time.
+
+7
+
+• Reputation and Brand Value Accrual: As the world inevitably moves toward sustainability,
+companies that are seen as part of the solution will enjoy stronger brand loyalty and less risk of
+public backlash. Bold climate action upstream will earn accolades from global institutions,
+environmental groups, and the public. This translates to intangible value that is nevertheless very
+real – brand equity, customer trust, and the benefit of the doubt in times of scrutiny. This can protect
+market capitalization and reduce risk of boycotts or negative press. We are entering an era where
+being climate-aligned is the price of admission for top companies; those who lead will be the ones
+writing the narrative. The value of being known as the first tech company to build all its products from
+truly carbon-neutral materials, for example, is immense in terms of PR and goodwill. It is difficult to
+put a dollar figure on it, but it differentiates the brand in a crowded marketplace and builds
+emotional connection with consumers who increasingly care about climate action.
+• Regulatory Favor and Influence: Governments are actively looking for ways to decarbonize heavy
+industry and often seek private-sector champions to demonstrate viability. A tech company that has
+invested in, say, a green steel facility or a low-carbon concrete pilot could find itself working closely
+with regulators as a trusted partner, rather than being on the receiving end of mandates. Early
+movers might enjoy incentives like grants, loan guarantees, or favorable procurement treatment
+(e.g. governments preferring contractors who use green materials). They’ll also have a credible voice
+to help shape reasonable regulations, ensuring new rules play to their strengths. On the flip side,
+laggards could face more punitive regulations made without their input. Thus, proactive companies
+can both help steer policy and reap the benefits of public-private collaboration, strengthening their
+position.
+Costs and Risks of Inaction or Slow Movement:
+- Regulatory and Market Penalties: As discussed, doing nothing means exposure to future carbon costs
+and compliance burdens. The EU CBAM is a prime example – a company importing high-carbon materials
+into Europe in a few years will directly pay a hefty levy tied to EU carbon prices 2 . Similar policies are
+expected elsewhere as countries strive for climate goals. Inaction essentially mortgages the company’s
+future with a carbon debt. Additionally, large customers (like automakers or governments) are starting to
+decarbonize their supply chains; suppliers that can’t provide low-carbon products will simply lose business.
+In the consumer space, products could face labeling or disclosure requirements (“embedded CO₂ per
+device”) that make a high-carbon supply chain a competitive disadvantage. The risk of inaction is being
+left with stranded assets and a supply chain that’s out of step with the market, incurring higher costs
+and losing sales.
+• Higher Long-Term Costs & Lost Savings: Paradoxically, trying to save money now by not
+investing can lead to higher costs later. For instance, if a company delays switching to green steel
+until it’s mandated, it might face a period of paying both for expensive offsets and for expensive lastminute procurement of the limited green steel available (because it did nothing to help scale supply).
+Meanwhile, competitors who invested early will have scaled supply with lower costs. We saw this
+dynamic in renewable energy: companies that signed long-term renewable contracts early locked in
+good prices, whereas latecomers sometimes face higher PPA prices due to increased demand. The
+same will likely happen with green commodities. Inaction also means missing out on the efficiency
+improvements that often come with process innovation – for example, modern electric furnaces can
+be more flexible and require less maintenance than old blast furnaces, etc. If you’re not part of that
+innovation, you don’t benefit from any productivity gains it brings. Thus, inaction can actually
+erode a company’s cost competitiveness over time.
+
+8
+
+• Climate Transition Risk to Business Continuity: As climate change accelerates, physical risks
+(extreme weather, resource scarcity) and transition risks (sudden shifts in technology or market
+norms) threaten business continuity. A slow-moving company could face shocks like: a key supplier
+going under because they couldn’t meet new emission rules or couldn’t get financing (since banks
+are starting to shun high-carbon projects); or climate extremes disrupting raw material production
+(e.g. droughts affecting aluminum smelters that rely on hydropower, etc.). Without alternative supply
+chains in place, a company could literally be unable to manufacture its products on time. On the
+other hand, a firm that has invested in resilient, low-carbon supply options has more flexibility
+and fallback. Inaction also increases the risk that the company will fall so far behind on its own
+climate targets that it faces investor lawsuits or governance crises. For example, climate-conscious
+shareholders may start demanding audited plans for Scope 3 reduction – a company that has done
+little will have poor answers, damaging investor relations and potentially its stock price. In short,
+slow movement courts a host of risks – from supply shocks to shareholder revolts – that could
+severely impact the business.
+• Loss of Talent and Erosion of Company Culture: Tech companies thrive on attracting the best
+talent, and today’s top talent wants to work on solving big problems, not contributing to them. If a
+company visibly lags in sustainability, employees may become disengaged or leave. We already
+see a significant portion of younger employees willing to change jobs over corporate climate stance
+4
+3 . Inaction on climate can thus directly hurt a company’s ability to recruit and retain innovative
+thinkers – the lifeblood of any tech firm. Additionally, taking bold action can galvanize and inspire
+existing staff (engineers love a grand challenge), whereas doing nothing can create cognitive
+dissonance or cynicism among employees who care about the company’s stated mission vs. its
+actual deeds. Over time, this can erode the culture of innovation and excellence. In contrast, being a
+frontrunner in sustainability can become a source of pride and purpose within the company,
+reinforcing a positive, forward-looking culture.
+• Reputational Damage and Brand Dilution: Eventually, as the world transitions, late movers will be
+called out. We are not far from the day when media and activists will publish rankings of the “dirtiest
+supply chains in tech” or similar. A company that is found dragging its feet could suffer brand
+damage that alienates customers. Think of how certain firms have been boycotted or shamed for
+labor practices or privacy issues – climate could be next. For consumer-facing brands especially,
+being seen as indifferent to climate impacts in your supply chain is a negative differentiator that
+competitors will exploit. There’s also a general erosion of trust: companies have talked big on
+climate; if by late this decade it’s evident those were hollow words backed by little action, public trust
+in the brand could plummet. Rebuilding a broken reputation is costly and sometimes impossible.
+Inaction today sets the stage for potential PR crises tomorrow.
+In summary, the long-term benefits of bold action far outweigh the transitory costs, whereas the longterm costs of inaction could be existential. Executives should view upstream decarbonization investment as
+a prudent long-term strategy: it is buying insurance against future disruption, purchasing a call option
+on new markets, and investing in the brand and resilience of the company. Yes, it requires capital and
+coordination, but hyperscalers are uniquely positioned to marshal both. The biggest risk would be to
+underestimate how quickly the landscape is changing – whether in policy, economics, or stakeholder
+expectations – and to find one’s company on the wrong side of history and market dynamics. Far better to
+lead from the front, shape the future, and reap the rewards.
+
+9
+
+Tech Firms as Market Makers for Green Commodities: Lessons from
+Renewables
+One need not hypothesize about the impact of corporate demand on global markets – the renewable
+energy revolution of the past decade provides a powerful proof of concept. Tech companies, in particular,
+have already demonstrated how their procurement decisions can accelerate an entire sector’s transition.
+The challenge now is to repeat that success for industrial commodities.
+In the 2010s, as mentioned, hyperscalers became anchor buyers of renewable power. They signed longterm contracts for wind and solar farms, even investing in projects, to supply their data centers with clean
+energy. This was driven by sustainability goals, but it had cascading effects. By 2022, corporations globally
+had signed a record 36.7 GW of renewable PPAs just in that year, with the tech sector accounting for the
+majority. Such firm demand gave developers the confidence (and financing) to build more projects, which in
+turn scaled manufacturing for turbines and solar panels, driving costs down. The American Clean Power
+Association noted a 100× increase in corporate clean power procurement over the last decade,
+accompanied by dramatic cost declines for renewables. Essentially, corporate buyers acted as market
+makers – creating a guaranteed market where one didn’t previously exist at scale, until economies of
+scale kicked in. Companies like Google proudly achieved “100% renewable” operations not by waiting for the
+grid to go green, but by catalyzing new green power capacity themselves.
+The precedent is clear. Now, imagine applying the same approach to green steel, green cement, and
+other materials: long-term offtake agreements, advance purchase commitments, even co-investments in
+first-of-a-kind facilities. This is starting to happen. Initiatives like the First Movers Coalition, launched by
+the World Economic Forum and U.S. government, unite over 100 companies (including several tech giants)
+to pledge early purchases of low-carbon products in “hard-to-abate” sectors 5 6 . For example, members
+of this coalition have committed to buy a certain percentage of steel and aluminum from near-zero carbon
+sources by 2030, effectively sending a demand signal to the market. Already, we’ve seen deals
+materialize: automakers and even tech firms have inked contracts for the first batches of fossil-free steel
+(such as Volvo purchasing steel made with hydrogen, or Mercedes-Benz contracting 50,000 tons from a
+green steel startup). In the U.S., a group of major steel buyers – including Microsoft – recently banded
+together to request millions of tons of near-zero emissions steel, in a collective push to persuade
+steelmakers to invest in clean capacity 7 . These moves echo the renewable playbook: aggregate demand,
+guarantee a market, and thus de-risk the supplier’s investment in new technology.
+Tech companies have a unique role to play as market makers because they often have the necessary
+scale, creditworthiness, and long-term outlook. A steel mill or cement plant requires a huge upfront
+investment and may operate for decades – its backers need confidence that there will be buyers for its
+premium-priced green product in the early years. A 15-year purchase agreement from a Google or
+Microsoft provides exactly that confidence (much as their 15–20 year PPAs did for wind farms). It effectively
+says: “Build it, and we will buy.” This is arguably more important for industrial decarbonization than even for
+power, because heavy industry has thinner margins and higher technology risk. As BloombergNEF
+observes, in the near term private-sector demand will drive industrial decarbonization, one offtake
+agreement at a time, while policy catches up, and that sectors that can absorb the green premium
+(like high-margin tech or auto) must lead the way. In practice, that means hyperscalers committing to
+purchase a portion of their construction steel, server aluminum, or building concrete from low-carbon
+
+10
+
+sources even if it costs more for now – exactly as they were willing to pay a bit extra for wind/solar in the
+early days.
+Another lesson from renewables is the importance of innovative financing. Tech firms didn’t necessarily
+own and operate wind farms themselves; they often signed “contracts for difference” or creative PPAs that
+guaranteed a price floor, enabling project developers to get bank loans. Similar creativity can be applied via
+green material purchase contracts or co-investment models. For instance, a company might agree to
+pay a fixed “green premium” per ton of steel for 10 years, giving the steelmaker a predictable return to
+justify building a $1 billion hydrogen DRI plant. In some cases, buyers might take an equity stake or provide
+cheap debt for such projects, blending roles of customer and financier. Apple’s approach to materials
+provides a concrete example: Apple issued \$4.7 billion in green bonds specifically to fund low-carbon
+manufacturing technologies in its supply chain 8 . Through this mechanism, Apple helped fund the
+world’s first commercial-scale carbon-free aluminum smelter (Elysis) and then became the first buyer of
+that ultra-low-carbon aluminum for its iPhone SE. Essentially, Apple acted as a market maker and catalyst
+– providing capital to get a climate-friendly technology out of the lab and into industrial reality, and in
+return securing a first-mover supply of a critical material with drastically reduced emissions. This mirrors its
+earlier strategy of investing in renewable energy projects to power its operations.
+The renewables experience also teaches that early action can influence policy. Corporate demand for clean
+power demonstrated to regulators that more ambitious renewable targets were feasible, and it built
+constituencies in many U.S. states and countries for cleaner grids. Likewise, if tech companies start
+demanding green steel and buying it, governments are more likely to enact supportive measures (like
+infrastructure spending on hydrogen or carbon capture, or stricter standards that favor those prepared).
+Moreover, standard-setting often involves early movers – companies that have figured out how to track
+and verify supply chain emissions can help create the accounting standards and certifications (for “green
+steel” or “net-zero concrete”) that later become industry norms. Tech firms are comfortable in these
+coalitions, as seen in their participation in groups like the Science Based Targets initiative or renewable
+energy buyers alliances. Bringing that collaborative clout to heavy industry will amplify impact.
+Finally, tech’s renewable push showed that public commitments drive internal innovation. When a
+company commits to 100% renewable energy or to use X% recycled material, it galvanizes its teams to find
+solutions. Google’s quest for 24/7 carbon-free electricity by 2030 is pushing it into advanced energy storage,
+smart load management, and policy advocacy. Similarly, a bold commitment such as “by 2030, 50% of the
+materials in our products (or buildings) will be from zero-carbon sources” would force cross-functional
+creativity – sourcing teams, engineers, sustainability experts working together to hit the target. It sets a
+clear, quantifiable goal that can rally the organization and produce technology spillovers (perhaps inventing
+new low-carbon alloys, or AI to optimize material circularity, etc.). In contrast, a vague aim to “encourage
+suppliers to reduce emissions” doesn’t inspire the same urgency or innovation. Thus, being a market
+maker not only influences external markets but also transforms the company internally – turning
+sustainability from a reporting exercise into a driver of R&D and operational excellence.
+In summary, the renewable energy precedent gives cause for optimism: when the world’s largest
+companies align purchasing power with climate ambition, seemingly impossible shifts can happen in just a
+few years. Tech firms helped renewables cross the chasm; now they can do the same for green cement,
+steel, aluminum, and more. The key lessons are to commit early, commit publicly, structure deals that
+reduce supplier risk, and partner broadly (with peers, startups, governments) to achieve critical mass. By
+being the first buyers and investors, hyperscalers can ensure these currently nascent solutions reach
+
+11
+
+commercial viability just in time to meet the world’s 2030 and 2050 climate deadlines. Just as importantly,
+they will fulfill the promise made when they claimed climate leadership – extending their impact from their
+own operations to the farthest reaches of their supply network, truly “greening” the backbone of the
+digital economy.
+
+Conclusion: Building the Climate-Aligned Supply Chain of the
+Future
+The climate crisis demands nothing less than a fundamental remaking of industrial systems. As this paper
+has argued, major tech companies have both the incentive and the ability to drive that remaking by
+investing in decarbonizing the heavy industries that feed into their products. This is a natural extension of
+their climate leadership: having optimized their own operations’ energy use and emissions, the next horizon
+is to tackle the embodied carbon in the steel, concrete, metals, and minerals that make modern
+technology possible. It is a daunting challenge – these sectors are often seen as “hard to abate” – but it is
+also an immense opportunity for innovation and leadership.
+By moving beyond incremental improvements and instead thinking in terms of systems change, tech firms
+can help create a future where the default inputs to our economy are climate-friendly. Imagine a world circa
+2035 where “green steel” is simply steel, where every new building is made with low-carbon cement,
+where every EV or smartphone contains only responsibly produced metals. That world will not emerge
+on its own in time; it needs bold action from those with the power to shape markets. The hyperscalers, with
+their multi-billion dollar supplier spends and culture of innovation, are ideally positioned to be the
+catalysts. They can bring to heavy industry what they brought to cloud computing and AI: ambition,
+investment, and acceleration.
+To get practical, tech executives should consider steps such as: establishing dedicated climate investment
+funds or vehicles for supply chain decarbonization (similar to Amazon’s Climate Pledge Fund, but focused
+upstream); setting specific procurement targets for green materials (e.g. “X% of our structural steel
+purchases will be near-zero CO₂ by 2030”); entering into consortiums to fund pilot plants (for novel cement
+chemistries or direct reduced iron with hydrogen); advocating for and helping design smart policies (like
+green public procurement standards or joint industry protocols for emissions data sharing); and continuing
+to transparently report progress. Initial projects should be pursued in partnership with experienced
+industrial players – the learning curve will be steep, but cross-industry collaboration is a feature, not a bug,
+of this process.
+Yes, there will be hurdles. Not every early project will succeed technically or financially – but that is all the
+more reason for cash-rich tech firms to lead, as they can absorb failures and learn from them. Yes, it will
+require venturing beyond one’s core competencies – but leading companies have done so time and again
+when necessary (whether it was Apple investing in chip fabrication or Amazon building a logistics empire,
+stepping out of comfort zones is what they do). Compared to the scale of these businesses and the capital
+they routinely deploy for share buybacks or acquisitions, the investment needed to green their supply
+chains is entirely within reach – especially when shared among multiple partners and balanced by the
+significant long-term paybacks outlined.
+The cost of complacency is far higher. If even the most resourceful companies in the world shy away from
+addressing the foundational emissions of industry, we simply will not hit global climate targets. Tech
+
+12
+
+companies risk undermining their own climate pledges and facing a future where they must severely curtail
+growth or scramble for last-ditch solutions under regulatory duress. Conversely, by acting now, they can
+help ensure that economic growth and climate action go hand in hand. They can enjoy the peace of mind
+that their astounding technological achievements are built on a sustainable foundation – that the
+cloud is running on green electrons and built with green steel, that the next billion smartphones won’t
+contribute to climate catastrophe in their making.
+In conclusion, this is a call for bold upstream climate investment as a strategic imperative. Executives at
+hyperscalers should view it not as philanthropy or compliance, but as visionary business strategy. It is
+about shaping the context in which they will operate 10, 20, 50 years from now. It is about resilience,
+reputation, and yes, doing the right thing for the planet that sustains all business. The heavy industries of
+the 20th century are ripe for reinvention, and they need the disruptive thinking of 21st-century tech leaders.
+By mobilizing their capital and creativity upstream, tech companies can secure their own futures and leave
+an indelible mark on the fight against climate change. It’s time to take the moonshot mindset that solved so
+many technological challenges and apply it to the building blocks of our world. The companies that do so
+will not only help save the planet – they will also be the architects of the new, green industrial
+revolution, and beneficiaries of the thriving markets that revolution creates.
+Sources:
+• IPCC & Climate urgency: IPCC AR6 Summary for Policymakers (2022) via SupplyChainDive.
+• Scope 3 dominance in emissions: Intel and industry data via SupplyChainDive.
+• Supplier investment challenges: SupplyChainDive report on supplier decarbonization costs.
+• CFO attitudes & cost of delay: SupplyChainDive (Geale quote).
+• Apple’s \$4.7 B Green Bond for low-carbon manufacturing: Apple Newsroom and SupplyChainDive
+8 .
+• Apple’s investment in carbon-free aluminum (ELYSIS partnership): Apple Newsroom.
+• EU Carbon Border Adjustment Mechanism details: PwC analysis 1 2 .
+• Deloitte 2023 Gen Z/Millennial Survey (climate & jobs): ESG Today summary 3 4 .
+• IBM System/360 gamble outcome: Wired historical piece.
+• Amazon long-term reinvestment strategy: Cascade “Amazon Growth Study”.
+• Ørsted transformation from coal to wind: McKinsey interview.
+• Corporate renewable procurement growth and cost impact: American Clean Power report.
+• Corporate renewable leaders (Amazon, Meta, Google capacities): ACP report; S&P Global analysis.
+• Buyers driving green steel demand & need for private-sector push: BloombergNEF.
+• Green steel cost premium now vs. future: BloombergNEF.
+• First-of-a-kind green steel premium (15–40%): Energy Transitions Comm..
+• Importance of demand signals and offtake agreements: ETC report; BloombergNEF.
+• Scope 3 abatement potential via low-CO₂ materials: ETC report.
+• Apple’s carbon-neutral supply chain 2030 commitment: Apple Inc., carbon neutrality goal (press
+release) 8 .
+• Cement industry emissions share: WEF report; Steel industry share: GlobalEfficiencyIntel.
+
+1
+
+2
+
+The EU CBAM: Implications for supply chains | PwC
+
+https://www.pwc.com/gx/en/services/tax/esg-tax/cbam-supply-chain-imperatives.html
+
+13
+
+3
+
+4
+
+Over 40% of Gen Z, Millennials Would Switch Jobs Over Climate Concerns: Deloitte Survey - ESG
+
+Today
+https://www.esgtoday.com/over-40-of-gen-z-millennials-would-switch-jobs-over-climate-concerns-deloitte-survey/
+5
+
+FMC I Members - The World Economic Forum
+
+https://initiatives.weforum.org/first-movers-coalition/community
+6
+
+First Movers Coalition - The World Economic Forum
+
+https://initiatives.weforum.org/first-movers-coalition/home
+7
+
+Major steel users band together to place first big 'green steel' order
+
+https://www.canarymedia.com/articles/clean-industry/major-steel-users-band-together-to-place-first-big-green-steel-order
+8
+
+Who will pay to decarbonize the supply chain? | Supply Chain Dive
+
+https://www.supplychaindive.com/news/who-will-pay-to-decarbonize-the-supply-chain/690631/
+
+14
+
+

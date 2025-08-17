@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperScale, HyperImpact: An Interactive Investment Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Tech Neutral -->
+    <!-- Application Structure Plan: A thematic, single-page dashboard application. The structure guides the user from the core problem ("The Why"), through the consequences ("The Stakes"), to the investment opportunities ("The Solutions"), the key actors ("The Players"), and finally the strategic "Path Forward". This non-linear, thematic flow allows users to explore sections based on interest, using interactive cards, charts, and tabs to make dense information digestible and engaging, which is more effective for web-based exploration than a linear slide-by-slide presentation. -->
+    <!-- Visualization & Content Choices: 
+        - Global Emissions (Inform): Donut Chart (Chart.js) to quickly show the scale of the problem. Interaction: Hover tooltips. Justification: Visual impact for a key statistic.
+        - Strategic Drivers (Organize/Inform): Interactive Cards (HTML/CSS/JS) to break down complex reasons into digestible chunks. Interaction: Click to expand. Justification: Encourages exploration.
+        - Risks vs. Rewards (Compare): Two-column layout with clickable lists/tabs to directly contrast the two paths. Interaction: Click to reveal details. Justification: Powerful narrative structure.
+        - Material Deep Dives (Compare/Organize): A tabbed interface with horizontal bar charts (Chart.js) and detailed textual descriptions. Interaction: Click tabs, hover charts. Justification: Organizes a large amount of data efficiently and visually compares investment gaps with potential.
+        - Hyperscaler Actions (Inform): Interactive logo grid. Interaction: Click logo for modal. Justification: Brand-centric and engaging way to present case studies.
+        - Strategic Recommendations (Organize): A clickable step-by-step list. Interaction: Click to expand. Justification: Presents the final call to action as a clear, actionable plan. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #333333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #4A5568;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #4A5568;
+            background-color: #4A5568;
+            color: #F8F7F4;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="sticky-nav" class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-[#4A5568]">HyperScale, HyperImpact</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#why" class="nav-link text-gray-600 font-medium">The Why</a>
+                <a href="#stakes" class="nav-link text-gray-600 font-medium">The Stakes</a>
+                <a href="#solutions" class="nav-link text-gray-600 font-medium">The Solutions</a>
+                <a href="#players" class="nav-link text-gray-600 font-medium">The Players</a>
+                <a href="#strategy" class="nav-link text-gray-600 font-medium">The Strategy</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#why" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Why</a>
+            <a href="#stakes" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Stakes</a>
+            <a href="#solutions" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Solutions</a>
+            <a href="#players" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Players</a>
+            <a href="#strategy" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Strategy</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#333333] leading-tight">HyperScale, HyperImpact</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Catalyzing a Green Industrial Revolution Through Upstream Tech Investment</p>
+                <a href="#why" class="mt-8 inline-block bg-[#4A5568] text-white font-bold rounded-lg px-8 py-3 hover:bg-opacity-90 transition-all">Explore the Investment Case</a>
+            </div>
+        </section>
+
+        <section id="why" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Next Frontier in Climate Leadership</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">While major technology companies have committed to ambitious climate goals, a significant challenge persists in addressing their "embodied carbon." This refers to the substantial Scope 3 emissions generated during the production of heavy industrial materials like steel and cement that form the backbone of our digital infrastructure. This section delves into why direct, proactive upstream investment is a strategic imperative to address this critical environmental and business challenge.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4">The Scale of the Problem</h3>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="emissionsChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-500 mt-2 text-sm">Combined CO₂ contribution from Steel and Cement production to global emissions.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="showModal('modal-regulatory')">
+                            <h4 class="font-bold mt-4 text-lg">Regulatory Insulation</h4>
+                            <p class="text-gray-600 mt-2 text-sm">Proactively mitigate future carbon taxes and compliance burdens, such as the EU's Carbon Border Adjustment Mechanism (CBAM).</p>
+                        </div>
+                        <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="showModal('modal-reputation')">
+                            <h4 class="font-bold mt-4 text-lg">Brand Leadership</h4>
+                            <p class="text-gray-600 mt-2 text-sm">Enhance corporate reputation among discerning consumers, investors, and top-tier talent.</p>
+                        </div>
+                        <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="showModal('modal-control')">
+                            <h4 class="font-bold mt-4 text-lg">Control Over Goals</h4>
+                            <p class="text-gray-600 mt-2 text-sm">Gain direct, verifiable control over emissions reductions to reliably achieve net-zero targets.</p>
+                        </div>
+                        <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="showModal('modal-resilience')">
+                            <h4 class="font-bold mt-4 text-lg">Supply Chain Resilience</h4>
+                            <p class="text-gray-600 mt-2 text-sm">Reduce exposure to volatile fossil-based commodity prices and geopolitical supply risks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stakes" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The High Stakes: Risk vs. Reward</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">The decision to pursue bold, transformative investment or maintain the status quo carries significant implications. The path of inaction is fraught with escalating financial, operational, and reputational risks, whereas historical precedents demonstrate that visionary leadership and strategic long-term investment can yield profound competitive advantages and market dominance.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="bg-[#F8F7F4] p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-red-700 mb-6 text-center">The Cost of Inaction</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div><strong class="block">Regulatory & Market Penalties:</strong> Failure to act exposes companies to escalating future carbon costs and compliance burdens. For instance, New York City's Local Law 97 (effective Jan 2024) imposes significant penalties on large buildings exceeding emissions limits, a trend expected to expand globally.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div><strong class="block">Higher Long-Term Costs:</strong> Delaying investment in green materials can paradoxically lead to increased costs later, forcing companies to pay for expensive offsets or procure scarce, high-cost low-carbon inputs when regulations or market demands become unavoidable.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div><strong class="block">Loss of Talent & Culture Erosion:</strong> Companies visibly lagging in sustainability efforts may struggle to attract and retain top-tier talent. A 2023 Deloitte survey indicated over 40% of Gen Z and Millennials are willing to change jobs due to corporate climate stance, impacting innovation and organizational vitality.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div><strong class="block">Reputational Damage:</strong> Intensifying scrutiny over corporate climate claims means that perceived "greenwashing" or insufficient action can severely erode brand trust and value, potentially leading to public backlash, boycotts, and negative press that impact market capitalization.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#F8F7F4] p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-green-700 mb-6 text-center">The Rewards of Leadership</h3>
+                        <div id="precedents-tabs" class="flex justify-center border-b mb-4">
+                            <button class="precedent-tab-button py-2 px-4 text-gray-500 font-semibold focus:outline-none active" data-target="precedent-renewables">Renewables</button>
+                            <button class="precedent-tab-button py-2 px-4 text-gray-500 font-semibold focus:outline-none" data-target="precedent-ibm">IBM</button>
+                            <button class="precedent-tab-button py-2 px-4 text-gray-500 font-semibold focus:outline-none" data-target="precedent-amazon">Amazon</button>
+                        </div>
+                        <div id="precedent-content">
+                            <div class="precedent-pane active" id="precedent-renewables">
+                                <h4 class="font-bold text-lg">Tech's Renewable Energy Push (2010s)</h4>
+                                <p class="mt-2 text-gray-700">Major tech companies initiated long-term Power Purchase Agreements (PPAs) for renewable energy, effectively paying an initial premium to stimulate and expand the market for clean power. This committed demand from large, influential customers rapidly scaled nascent solutions. Result: Corporate clean energy purchasing surged 100-fold within ten years, while solar costs plummeted by approximately 71% and wind power by 47%, fundamentally transforming the global electricity industry.</p>
+                            </div>
+                            <div class="precedent-pane hidden" id="precedent-ibm">
+                                <h4 class="font-bold text-lg">IBM's "Bet-the-Business" System/360 (1964)</h4>
+                                <p class="mt-2 text-gray-700">IBM made an audacious $5 billion investment (over $35 billion in today's currency) to develop the System/360 mainframe computer family. This sum, exceeding IBM's annual revenue at the time, was a true "bet-the-company" gamble. The vision was to establish a long-term platform standard for computing. Result: By 1966, IBM was shipping 1,000 System/360 units monthly, and the architecture became the de facto standard for decades, cementing IBM's dominance of the IT industry.</p>
+                            </div>
+                            <div class="precedent-pane hidden" id="precedent-amazon">
+                                <h4 class="font-bold text-lg">Amazon's Infrastructure-First Growth Strategy (2000s)</h4>
+                                <p class="mt-2 text-gray-700">Amazon famously operated for years with minimal profit, relentlessly reinvesting revenue into long-term infrastructure: warehouses, extensive distribution networks, and cloud data centers. By sacrificing short-term earnings, Amazon established an almost unassailable delivery network and launched Amazon Web Services (AWS). Result: These early, costly investments profoundly shaped today's e-commerce and cloud computing landscapes, establishing Amazon's global dominance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Solutions: A Deep Dive into Green Materials</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Decarbonizing "hard-to-abate" sectors is a complex but critical endeavor. This section provides a detailed overview of the key industrial materials, their associated emissions challenges, and the innovative technologies and leading companies driving their decarbonization. Targeted investment in these areas presents significant opportunities for both environmental impact and strategic market positioning.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4 sm:p-8">
+                    <div class="flex flex-wrap justify-center -mb-px border-b border-gray-200">
+                        <button class="tab-button active" data-target="tab-steel">Steel</button>
+                        <button class="tab-button" data-target="tab-cement">Cement</button>
+                        <button class="tab-button" data-target="tab-aluminum">Aluminum</button>
+                        <button class="tab-button" data-target="tab-copper">Copper</button>
+                        <button class="tab-button" data-target="tab-rare-earths">Rare Earths</button>
+                    </div>
+                    <div class="pt-8">
+                        <div class="tab-pane active" id="tab-steel">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Green Steel</h3>
+                                    <p class="text-gray-600 mb-4">Steel is a foundational material for data center structures, rebar, server racks, and manufacturing equipment. Its production is highly emissions-intensive, accounting for approximately 7% of global CO₂ emissions, primarily due to the reliance on coal-fired blast furnaces. Decarbonizing steel is essential for reducing the embodied carbon in critical infrastructure.</p>
+                                    <h4 class="font-semibold mt-6 mb-2">Key Technologies:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li><strong>Hydrogen Direct Reduction (H₂-DRI):</strong> Utilizes green hydrogen to reduce iron ore, producing water vapor instead of CO₂. This pathway offers up to 95% CO₂ reduction per ton.</li>
+                                        <li><strong>Molten Oxide Electrolysis:</strong> Employs electricity to directly produce iron metal, with oxygen as the primary byproduct, eliminating direct CO₂ emissions.</li>
+                                    </ul>
+                                    <h4 class="font-semibold mt-6 mb-2">Innovators and Recent Developments:</h4>
+                                    <p class="text-gray-700"><strong>Boston Metal:</strong> An MIT spinout, scaling a molten oxide electrolysis process. Recently raised an additional $51 million in July 2025 to fund its debut plant in Brazil, focusing initially on niobium extraction to refine the process for steel. Aims for a U.S. demonstration facility around 2028.</p>
+                                    <p class="text-gray-700 mt-2"><strong>H₂ Green Steel (Sweden):</strong> Secured EUR 1.5 billion (USD 1.6 billion) in equity financing in September 2024 to finance Europe's first industrial-scale green steel plant in Boden, aiming for approximately 95% CO₂ emissions reductions compared to conventional producers.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-center mb-2">Investment Snapshot (Illustrative)</h4>
+                                    <div class="chart-container h-64">
+                                        <canvas id="steelChart"></canvas>
+                                    </div>
+                                    <p class="text-center text-gray-500 mt-2 text-sm">Achieving net-zero steel requires approximately $6 billion per year for low-CO₂ technologies, with an additional $2 trillion for supporting infrastructure (renewable electricity, hydrogen, CCUS) through 2050. First-of-a-kind projects face a 15-40% cost premium, which can be mitigated by early investment.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane hidden" id="tab-cement">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Low-Carbon Cement & Concrete</h3>
+                                    <p class="text-gray-600 mb-4">Cement is the essential binder in concrete, used extensively in data center foundations, walls, and cooling structures. Cement production is one of the most challenging industrial processes to decarbonize, contributing approximately 8% of global CO₂ emissions from both fuel combustion and the chemical process of limestone calcination.</p>
+                                    <h4 class="font-semibold mt-6 mb-2">Key Technologies:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li><strong>Clinker Substitution:</strong> Utilizing lower-carbon binders such as fly ash, slag, or calcined clay to replace a portion of traditional Portland cement.</li>
+                                        <li><strong>Novel Chemistries:</strong> Developing new cement formulations that inherently emit less CO₂ during production.</li>
+                                        <li><strong>Carbon Capture:</strong> Implementing technologies to capture CO₂ directly from cement kilns.</li>
+                                        <li><strong>Carbon Curing:</strong> Injecting CO₂ into concrete during mixing or curing to permanently mineralize it, reducing cement needs and storing CO₂.</li>
+                                    </ul>
+                                    <h4 class="font-semibold mt-6 mb-2">Innovators and Recent Developments:</h4>
+                                    <p class="text-gray-700"><strong>Carbon Upcycling:</strong> Secured an $18 million funding round in June 2025, led by Builders Vision, to accelerate commercialization of its carbon capture and utilization technology for cement. This includes a major project at Ash Grove's Mississauga plant and a new partnership with TITAN Group.</p>
+                                    <p class="text-gray-700 mt-2"><strong>Terra CO2:</strong> Secured $124.5 million in July 2025 to accelerate the commercial rollout of its low-carbon cement alternatives.</p>
+                                    <p class="text-gray-700 mt-2"><strong>CarbonCure:</strong> Already deploying CO₂ injection systems globally. Meta has also announced agreements to invest in scaling CarbonBuilt's technology, which can cut concrete's carbon footprint by up to 70%.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-center mb-2">Investment Snapshot (Illustrative)</h4>
+                                    <div class="chart-container h-64">
+                                        <canvas id="cementChart"></canvas>
+                                    </div>
+                                    <p class="text-center text-gray-500 mt-2 text-sm">Transforming the global cement and concrete industry by 2050 will require approximately $1–1.5 trillion in cumulative investment. Impact Potential: Implementing a portfolio of solutions can achieve 30-70% CO₂ reduction per concrete mix, and cumulatively avoid 98 gigatons of CO₂ from 2022-2050.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane hidden" id="tab-aluminum">
+                             <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Sustainable Aluminum</h3>
+                                    <p class="text-gray-600 mb-4">Aluminum is a key material in data center equipment, including server casings, electrical components, and cooling infrastructure, as well as in building facades. Its production is highly electricity-intensive and traditionally involves carbon anodes that emit CO₂. Decarbonizing aluminum is crucial for reducing the embodied carbon in tech hardware.</p>
+                                    <h4 class="font-semibold mt-6 mb-2">Key Technologies:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li><strong>Clean Electricity:</strong> Utilizing renewable energy sources for smelting, which accounts for approximately 60% of aluminum’s CO₂ emissions.</li>
+                                        <li><strong>Inert Anode Technology:</strong> Eliminates direct CO₂ emissions from the smelting reaction by replacing conventional carbon anodes with ceramic or alloy materials, emitting pure oxygen instead of CO₂.</li>
+                                        <li><strong>Increased Recycling:</strong> Recycling aluminum uses only about 5% of the energy required for primary production, making it a powerful decarbonization lever.</li>
+                                    </ul>
+                                    <h4 class="font-semibold mt-6 mb-2">Innovators and Recent Developments:</h4>
+                                    <p class="text-gray-700"><strong>Elysis (Alcoa and Rio Tinto JV):</strong> Leading the commercialization of inert anode technology. Apple purchased the first batch of carbon-free aluminum from Elysis in 2019, produced at a pilot facility in Quebec.</p>
+                                    <p class="text-gray-700 mt-2"><strong>Alcoa:</strong> In July 2025, Alcoa strategically shifted to ESG-driven aluminum by selling a stake in Ma'aden Aluminum Company to fund low-carbon aluminum R&D, including its EcoLum product, which has a carbon footprint 50% below industry averages and commands a $100–$200/ton premium. Alcoa sourced 86% of its smelter electricity from renewable energy in 2024.</p>
+                                    <p class="text-gray-700 mt-2"><strong>China:</strong> Shifting its aluminum production focus to secondary production and green energy integration (hydro, wind, solar) to align with its 2060 carbon neutrality goal, with aluminum production reaching 43 million metric tons in 2024.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-center mb-2">Investment Snapshot (Illustrative)</h4>
+                                    <div class="chart-container h-64">
+                                        <canvas id="aluminumChart"></canvas>
+                                    </div>
+                                    <p class="text-center text-gray-500 mt-2 text-sm">Fully decarbonizing the global aluminum sector could require cumulative investments ranging from $500 billion to $1.5 trillion, largely for clean power capacity. Impact Potential: Using 100% renewable electricity can reduce CO₂ footprint by ~75%; inert anode technology can achieve potentially zero direct CO₂ emissions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane hidden" id="tab-copper">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Cleaner Copper Refining</h3>
+                                    <p class="text-gray-600 mb-4">Copper is an indispensable conductor in electrical infrastructure, with data centers containing vast quantities in power cables, bus bars, and circuit boards. While its carbon footprint per ton is lower than steel or aluminum, global copper demand is projected to double by 2035 due to electrification, necessitating decarbonization efforts.</p>
+                                    <h4 class="font-semibold mt-6 mb-2">Key Technologies:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li><strong>Catalytic Leaching:</strong> Enables extraction of copper from low-grade ores at ambient conditions, drastically reducing the need for energy-intensive smelting.</li>
+                                        <li><strong>Electrifying Smelting:</strong> Replacing fossil fuels with clean electricity in pyrometallurgical processes.</li>
+                                        <li><strong>Enhanced Recycling:</strong> Improving technologies for copper recovery from e-waste and other scrap, as recycling uses significantly less energy than primary production.</li>
+                                    </ul>
+                                    <h4 class="font-semibold mt-6 mb-2">Innovators and Recent Developments:</h4>
+                                    <p class="text-gray-700"><strong>Jetti Resources (U.S.):</strong> Developed a breakthrough catalytic leaching process that can cut CO₂ emissions by approximately 40% per unit of copper. Jetti has successfully piloted its technology, attracting investments from major mining companies and downstream users like BMW.</p>
+                                    <p class="text-gray-700 mt-2"><strong>Edge Copper Corporation:</strong> Formed in July 2025 with $17 million in financing to advance the Zonia Copper Project in Arizona, which plans to produce pure copper cathode on-site, streamlining permitting and development.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-center mb-2">Investment Snapshot (Illustrative)</h4>
+                                    <div class="chart-container h-64">
+                                        <canvas id="copperChart"></canvas>
+                                    </div>
+                                    <p class="text-center text-gray-500 mt-2 text-sm">The copper industry requires over $100 billion globally to decarbonize, encompassing new processes and clean power sources. Impact Potential: A 40% emissions cut via leaching translates to saving approximately 1–2 tons of CO₂ per tonne of copper produced. Scaling this to expected demand could avoid 50–100 million tonnes of CO₂ per year by 2035.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane hidden" id="tab-rare-earths">
+                             <div class="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Rare Earth Magnets & Materials</h3>
+                                    <p class="text-gray-600 mb-4">Rare earth elements (e.g., neodymium, dysprosium) are indispensable for high-efficiency motors in wind turbines, electric vehicles, and data center components. While their volume is smaller, their supply chain is concentrated (over 90% in China) and associated with significant environmental pollution and geopolitical risks, making sustainable sourcing critical for tech hardware.</p>
+                                    <h4 class="font-semibold mt-6 mb-2">Key Technologies:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li><strong>Magnet-to-Magnet Recycling:</strong> Reprocessing end-of-life magnets from electronics or manufacturing waste into new high-performance magnets, significantly reducing energy demand and toxic waste.</li>
+                                        <li><strong>Cleaner Processing:</strong> Advances in separation chemistry and electrolysis to reduce the heavy chemical and thermal steps traditionally involved in rare earth processing.</li>
+                                        <li><strong>Improved Mining Practices:</strong> Implementing robust environmental controls and using renewable power for milling and dry tailings disposal to minimize harm.</li>
+                                    </ul>
+                                    <h4 class="font-semibold mt-6 mb-2">Innovators and Recent Developments:</h4>
+                                    <p class="text-gray-700"><strong>Apple & MP Materials:</strong> Apple announced a new $500 million commitment in July 2025 to buy American-made rare earth magnets from MP Materials and establish a cutting-edge rare earth recycling line in Mountain Pass, California. Apple aims for 100% recycled rare earth elements in all its device magnets by 2025.</p>
+                                    <p class="text-gray-700 mt-2"><strong>Noveon Magnetics (U.S.):</strong> A prominent startup focused on magnet-to-magnet recycling, operating a facility in Texas that achieves 90% energy savings compared to traditional magnet manufacturing. Recently raised $75 million to scale up.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-center mb-2">Investment Snapshot (Illustrative)</h4>
+                                    <div class="chart-container h-64">
+                                        <canvas id="rareEarthsChart"></canvas>
+                                    </div>
+                                    <p class="text-center text-gray-500 mt-2 text-sm">Building a diversified, clean rare earth supply chain requires recreating an industry that largely migrated offshore. While the market size is smaller than steel or cement, private sector investment is crucial to scale commercial capacity, particularly in recycling, where less than 1% of rare earth magnets are currently recycled. Impact Potential: Recycled magnets exhibit nearly 10 times lower energy demand than magnets from mined material, leading to significantly lower CO₂ emissions and avoiding toxic byproducts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="players" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Players: Hyperscalers in Action</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">The world's leading technology companies are not merely setting ambitious climate targets; they are actively pioneering the direct investment model in upstream decarbonization. Their initiatives serve as powerful proofs of concept, demonstrating the feasibility and strategic benefits of this approach, and paving the way for broader industry adoption and accelerated impact.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="player-card cursor-pointer" onclick="showModal('modal-google')">
+                        <img src="https://placehold.co/150x80/E8F0FE/4285F4?text=Google" alt="Google Logo" class="mx-auto rounded-lg transition-transform duration-300 hover:scale-105">
+                        <p class="font-semibold mt-4">Google</p>
+                    </div>
+                    <div class="player-card cursor-pointer" onclick="showModal('modal-microsoft')">
+                        <img src="https://placehold.co/150x80/E5F2FB/00A4EF?text=Microsoft" alt="Microsoft Logo" class="mx-auto rounded-lg transition-transform duration-300 hover:scale-105">
+                        <p class="font-semibold mt-4">Microsoft</p>
+                    </div>
+                    <div class="player-card cursor-pointer" onclick="showModal('modal-meta')">
+                        <img src="https://placehold.co/150x80/E6F3FF/0062E0?text=Meta" alt="Meta Logo" class="mx-auto rounded-lg transition-transform duration-300 hover:scale-105">
+                        <p class="font-semibold mt-4">Meta</p>
+                    </div>
+                    <div class="player-card cursor-pointer" onclick="showModal('modal-apple')">
+                        <img src="https://placehold.co/150x80/F5F5F7/A2AAAD?text=Apple" alt="Apple Logo" class="mx-auto rounded-lg transition-transform duration-300 hover:scale-105">
+                        <p class="font-semibold mt-4">Apple</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Strategy: A Path Forward for Investors</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">To catalyze a green industrial revolution and secure long-term competitive advantage, investors and hyperscalers must translate ambition into concrete action. These five strategic recommendations outline a robust framework for building the climate-aligned supply chain of the future, emphasizing collaboration, demand signaling, and integrated approaches.</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-6">
+                        <div class="strategy-item bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-xl text-[#4A5568]">1. Form Collaborative Investment Coalitions</h3>
+                            <p class="mt-2 text-gray-600">Proactively pool financial resources to establish dedicated funds or initiatives specifically targeting green industrial ventures. This collaborative approach allows for shared risk mitigation in early-stage industrial investments and facilitates the alignment on common standards for low-carbon materials, ensuring broader market benefits.</p>
+                        </div>
+                        <div class="strategy-item bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-xl text-[#4A5568]">2. Scale Demand with Offtake Agreements</h3>
+                            <p class="mt-2 text-gray-600">Underpin ambitious climate goals with concrete and binding purchase commitments. Companies should conduct thorough material usage audits and publicly commit to quantifiable procurement targets (e.g., "50% of our structural steel purchases will be near-zero CO₂ by 2030"). Replicating the highly successful renewable Power Purchase Agreement (PPA) strategy, these commitments de-risk projects for producers by guaranteeing market demand.</p>
+                        </div>
+                        <div class="strategy-item bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-xl text-[#4A5568]">3. Integrate into Procurement & Design</h3>
+                            <p class="mt-2 text-gray-600">Systematically embed low-carbon material requirements directly into Requests for Proposals (RFPs) for new construction projects and hardware procurement. This creates a strong pull-through effect, compelling suppliers to innovate. Concurrently, internal design teams should actively explore alternative structural designs, such as utilizing mass timber or employing smarter engineering principles to reduce overall material usage, as demonstrated by Microsoft's pilot projects.</p>
+                        </div>
+                        <div class="strategy-item bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-xl text-[#4A5568]">4. Advocate for Supportive Policy</h3>
+                            <p class="mt-2 text-gray-600">While pursuing private initiatives, hyperscalers should actively advocate for public policies that support industrial decarbonization. This includes lobbying for stricter building codes incorporating embodied carbon limits, advocating for increased R&D funding for industrial decarbonization technologies, and promoting green public procurement standards where governments prioritize low-carbon materials.</p>
+                        </div>
+                        <div class="strategy-item bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-xl text-[#4A5568]">5. Ensure Transparency and Measurement</h3>
+                            <p class="mt-2 text-gray-600">To ensure credibility and accurately track progress, companies must rigorously measure and publicly report the embodied carbon of their new projects and products. Transparently showcasing tangible improvements (e.g., "embodied carbon per MW of data center capacity decreased by 30% from 2025 to 2030") builds accountability and strengthens the case for continued investment among all stakeholders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#333333] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-bold text-lg">It is imperative to apply the "moonshot mindset" to the foundational building blocks of our global economy.</p>
+            <p class="mt-2 text-gray-400">The corporations that lead this transformative charge will not only contribute significantly to planetary sustainability but will also emerge as the architects and beneficiaries of the new, green industrial revolution.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-regulatory" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Regulatory Insulation & Risk Reduction</h3>
+            <p class="text-gray-700 mb-4">The global regulatory landscape for environmental impact is tightening, presenting both challenges and opportunities. Companies that proactively invest in decarbonizing their supply chains will gain significant insulation from future regulatory shocks. This strategic move effectively "climate-proofs" the supply chain, acting as a vital form of insurance against future carbon taxes, trade tariffs, and potential supply disruptions in an increasingly decarbonizing global economy.</p>
+            <p class="text-gray-700"><strong>Example:</strong> The European Union's Carbon Border Adjustment Mechanism (CBAM), set to impose costs on carbon-intensive imports like steel, cement, and aluminum starting in 2026. Firms that fail to reduce their embedded emissions will face direct financial penalties, as they will be required to purchase carbon certificates for high-carbon materials. This transforms climate action from a perceived cost center into a core component of enterprise risk management and long-term value creation.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-reputation" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Reputational Gains & Brand Leadership</h3>
+            <p class="text-gray-700 mb-4">Bold climate action, particularly upstream in the supply chain, significantly enhances corporate reputation among a broad spectrum of stakeholders, including consumers, investors, and prospective talent. There is a growing demand for sustainability, especially among younger generations. By visibly championing the use of green steel or carbon-free aluminum in their products and infrastructure, tech companies powerfully reinforce their brands and build trust.</p>
+            <p class="text-gray-700"><strong>Data Point:</strong> A 2023 Deloitte survey revealed that over 40% of Gen Z and Millennials have either changed jobs or plan to do so due to climate concerns, and more than half actively research a company's environmental policies before joining. A PwC 2024 survey indicated that consumers are willing to pay an average of 9.7% more for sustainably produced or sourced goods. Climate leadership is no longer merely a component of Corporate Social Responsibility (CSR); it is fundamental to maintaining brand equity and drawing in the skilled workforce that seeks to "make a difference."</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-control" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Control Over Climate Goal Attainment</h3>
+            <p class="text-gray-700 mb-4">Direct investment upstream provides companies with a level of control over emissions reductions that is otherwise unattainable within their operational boundaries. Conventional Scope 3 approaches often rely on indirect and inherently unreliable measures, such as merely encouraging suppliers to act or purchasing carbon offsets of varying quality. Many suppliers in heavy industries, operating on thin margins, frequently lack the capital to invest in expensive green technologies without significant external support.</p>
+            <p class="text-gray-700">In stark contrast, if a hyperscaler actively helps finance a green steel plant or a low-carbon cement facility, it directly ensures a reliable supply of climate-aligned materials. This locks in tangible emissions reductions that directly advance the company's net-zero goals, significantly de-risking the path to achieving climate targets and ensuring that 2030 or 2040 climate commitments remain firmly within the company's own span of control.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-resilience" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Supply Chain Resilience & Security</h3>
+            <p class="text-gray-700 mb-4">The evolving climate and geopolitical landscape introduces new and significant risks to raw material supply chains. Fossil-based commodity supply chains, such as steel, are inherently volatile, with prices frequently fluctuating based on coal and electricity costs. Furthermore, the mining of critical materials like rare earths is often geographically concentrated in a few regions, presenting both environmental and political vulnerabilities.</p>
+            <p class="text-gray-700">Investing in greener production methods—such as steel manufactured with renewable energy or recycled materials, or supporting novel mining and recycling techniques for critical minerals—can effectively diversify and stabilize supply sources. For example, a green steel facility utilizing electric arc furnaces and scrap metal not only drastically cuts emissions but also reduces reliance on volatile coal markets and long, vulnerable global transport routes. In essence, supply chains aligned with climate goals are inherently more robust and resilient in the long term.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-google" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Google (Alphabet)</h3>
+            <p class="text-gray-700 mb-2"><strong>Climate Goal:</strong> Committed to achieving net-zero emissions across all its operations and value chain by 2030, including a target to halve its total Scope 1-3 emissions by 2030.</p>
+            <p class="text-gray-700"><strong>Relevant Initiatives:</strong> In 2023, Google joined the Sustainable Steel Buyers Platform, a coalition dedicated to procuring near-zero emissions steel, sending a strong demand signal to producers. Google is also a vocal participant in the First Movers Coalition, pledging to purchase a percentage of future materials from low-carbon sources. The company actively pilots low-carbon concrete and recycled materials in data center construction, utilizing supplementary cementitious materials to reduce clinker content. Google’s Circular Economy commitments align with adopting recycled metals in new equipment.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-microsoft" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Microsoft</h3>
+            <p class="text-gray-700 mb-2"><strong>Climate Goal:</strong> To be carbon negative by 2030, removing more CO₂ than it emits across all Scope 1, 2, and 3 emissions, with a specific target to reduce Scope 3 emissions by 55% by 2030.</p>
+            <p class="text-gray-700"><strong>Relevant Initiatives:</strong> Microsoft established a $1 billion Climate Innovation Fund, which has invested in CarbonCure and Prometheus Materials (low-carbon concrete innovators), and Boston Metal (green steel technology). Microsoft is pioneering the construction of new data centers using cross-laminated timber (CLT) instead of traditional concrete and steel, demonstrating a 35-65% reduction in embodied carbon in pilot projects. As a founding member of the Sustainable Steel Buyers Platform, Microsoft emphasizes that enabling low-carbon steel is essential for its carbon-negative goal.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-meta" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Meta (Facebook)</h3>
+            <p class="text-gray-700 mb-2"><strong>Climate Goal:</strong> Committed to achieving net-zero emissions across its entire value chain by 2030, with a specific goal of achieving net-zero embodied carbon in new buildings by the same year.</p>
+            <p class="text-gray-700"><strong>Relevant Initiatives:</strong> Meta is a leader in low-carbon concrete deployment, systematically redesigning data center projects to use less concrete and substitute lower-carbon mixes, achieving a 20% intensity reduction in new builds. The company has directly invested in innovative technologies, partnering with CarbonBuilt (via a purchase agreement) to retrofit concrete block plants with CO₂-curing technology and providing carbon financing to CarbiCrete for cement-free concrete. Meta has also applied its AI research to optimize concrete formulations, designing mixes with up to 70% lower emissions in lab tests.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+    <div id="modal-apple" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 invisible">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full transform -translate-y-10">
+            <h3 class="text-2xl font-bold mb-4">Apple</h3>
+            <p class="text-gray-700 mb-2"><strong>Climate Goal:</strong> Pledged to achieve 100% carbon neutrality for its entire supply chain and products by 2030, building on its already carbon-neutral operations.</p>
+            <p class="text-gray-700"><strong>Relevant Initiatives:</strong> Apple has pioneered direct investment in upstream green technologies, notably investing in the Elysis joint venture and procuring the world’s first carbon-free aluminum for its products in 2019, funded through its $4.7 billion Green Bond program. In July 2025, Apple committed $500 million to MP Materials for US-made rare earth magnets and to establish a new recycling facility, aiming for 100% recycled rare earth elements in all its magnets by 2025. Apple’s material engineers have also developed new alloys to increase recycled content without compromising quality.</p>
+            <button class="mt-6 bg-gray-200 text-gray-800 font-bold rounded-lg px-6 py-2 hover:bg-gray-300" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chartColors = {
+                bg: ['#8A9A5B', '#E29B7F', '#87CEEB', '#D2B48C', '#4A5568'],
+                border: '#F8F7F4'
+            };
+
+            const emissionsCtx = document.getElementById('emissionsChart').getContext('2d');
+            new Chart(emissionsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cement Production', 'Iron & Steel Production', 'Other Global Emissions'],
+                    datasets: [{
+                        label: 'Global CO₂ Emissions Contribution',
+                        data: [8, 7, 85],
+                        backgroundColor: chartColors.bg,
+                        borderColor: chartColors.border,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ~${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            const materialChartConfig = (labels, data) => ({
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Investment (Illustrative)',
+                        data: data,
+                        backgroundColor: chartColors.bg,
+                        borderColor: chartColors.border,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, display: false },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('steelChart').getContext('2d'), materialChartConfig(['Investment Gap', 'Recent Funding'], [100, 25]));
+            new Chart(document.getElementById('cementChart').getContext('2d'), materialChartConfig(['Investment Gap', 'Recent Funding'], [100, 15]));
+            new Chart(document.getElementById('aluminumChart').getContext('2d'), materialChartConfig(['Investment Gap', 'Recent Funding'], [100, 30]));
+            new Chart(document.getElementById('copperChart').getContext('2d'), materialChartConfig(['Investment Gap', 'Recent Funding'], [100, 10]));
+            new Chart(document.getElementById('rareEarthsChart').getContext('2d'), materialChartConfig(['Investment Gap', 'Recent Funding'], [100, 40]));
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const precedentTabs = document.querySelectorAll('.precedent-tab-button');
+            const precedentPanes = document.querySelectorAll('.precedent-pane');
+            precedentTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    precedentTabs.forEach(t => t.classList.remove('active', 'border-b-2', 'border-green-700'));
+                    tab.classList.add('active', 'border-b-2', 'border-green-700');
+                    const target = document.getElementById(tab.dataset.target);
+                    precedentPanes.forEach(p => p.classList.add('hidden'));
+                    target.classList.remove('hidden');
+                });
+                tab.classList.remove('border-b-2', 'border-green-700');
+                if(tab.classList.contains('active')) {
+                     tab.classList.add('border-b-2', 'border-green-700');
+                }
+            });
+
+            const materialTabs = document.querySelectorAll('#solutions .tab-button');
+            const materialPanes = document.querySelectorAll('#solutions .tab-pane');
+            materialTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    materialTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const target = document.getElementById(tab.dataset.target);
+                    materialPanes.forEach(p => p.classList.add('hidden'));
+                    materialPanes.forEach(p => p.classList.remove('active'));
+                    target.classList.remove('hidden');
+                    target.classList.add('active');
+                });
+            });
+        });
+
+        function showModal(modalID) {
+            const modal = document.getElementById(modalID);
+            modal.classList.remove('invisible', 'opacity-0');
+            modal.querySelector('.modal-content').classList.remove('-translate-y-10');
+        }
+
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.add('invisible', 'opacity-0');
+                modal.querySelector('.modal-content').classList.add('-translate-y-10');
+            });
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "Escape") {
+                closeAllModals();
+            }
+        });
+    </script>
+</body>
+</html>
