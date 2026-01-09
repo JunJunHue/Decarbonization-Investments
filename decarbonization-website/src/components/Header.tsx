@@ -9,7 +9,8 @@ const Header: React.FC = () => {
     { href: '#stakes', label: 'The Stakes' },
     { href: '#solutions', label: 'The Solutions' },
     { href: '#players', label: 'The Players' },
-    { href: '#strategy', label: 'The Strategy' }
+    { href: '#strategy', label: 'The Strategy' },
+    { href: '#predictor', label: 'Demand Predictor' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -21,9 +22,9 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300">
+    <header className="backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300" style={{ backgroundColor: 'rgba(245, 243, 237, 0.8)' }}>
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#" className="text-xl font-bold text-[#4A5568]">
+        <a href="#" className="text-xl font-bold" style={{ color: '#5A6B4F' }}>
           HyperScale, HyperImpact
         </a>
         
@@ -33,7 +34,7 @@ const Header: React.FC = () => {
             <button
               key={item.href}
               onClick={() => scrollToSection(item.href)}
-              className="text-gray-600 font-medium hover:text-[#4A5568] transition-colors duration-200"
+              className="font-medium transition-colors duration-200" style={{ color: '#6B7A5F' }} onMouseEnter={(e) => e.currentTarget.style.color = '#5A6B4F'} onMouseLeave={(e) => e.currentTarget.style.color = '#6B7A5F'}
             >
               {item.label}
             </button>
@@ -55,12 +56,12 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t">
+        <div className="md:hidden border-t" style={{ backgroundColor: '#F5F3ED', borderColor: '#C4B89A' }}>
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => scrollToSection(item.href)}
-              className="block w-full text-left py-3 px-6 text-sm text-gray-600 hover:bg-gray-100 transition-colors duration-200"
+              className="block w-full text-left py-3 px-6 text-sm transition-colors duration-200" style={{ color: '#6B7A5F' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#E8E4D8'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
             >
               {item.label}
             </button>

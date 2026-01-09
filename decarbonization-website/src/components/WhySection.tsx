@@ -52,7 +52,7 @@ const WhySection: React.FC = () => {
   };
 
   return (
-    <section id="why" className="py-20 bg-gray-50">
+    <section id="why" className="py-20" style={{ backgroundColor: '#F5F3ED' }}>
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-12"
@@ -77,7 +77,7 @@ const WhySection: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-semibold text-center mb-6">The Scale of the Problem</h3>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="p-6 rounded-lg shadow-lg" style={{ backgroundColor: '#F0EDE5' }}>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
@@ -94,7 +94,7 @@ const WhySection: React.FC = () => {
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value: number) => [`${value}%`, 'Global CO₂ Emissions']}
+                    formatter={(value: number | undefined) => [`${value ?? 0}%`, 'Global CO₂ Emissions']}
                   />
                   <Legend />
                 </PieChart>
@@ -115,7 +115,7 @@ const WhySection: React.FC = () => {
             {strategicDrivers.map((driver, index) => (
               <motion.div
                 key={driver.id}
-                className="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
+                className="p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all duration-300" style={{ backgroundColor: '#F0EDE5' }}
                 onClick={() => handleCardClick(driver.id)}
                 whileHover={{ y: -5 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -123,9 +123,8 @@ const WhySection: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-center mb-3">
-                  <driver.icon className="w-6 h-6 text-[#4A5568] mr-2" />
-                  <h4 className="font-bold text-lg">{driver.title}</h4>
+                <div className="mb-3">
+                  <h4 className="font-bold text-lg" style={{ color: '#5A6B4F' }}>{driver.title}</h4>
                 </div>
                 <p className="text-gray-600 text-sm mb-3">{driver.description}</p>
                 
@@ -151,7 +150,7 @@ const WhySection: React.FC = () => {
 
         {/* Additional Context from Research */}
         <motion.div 
-          className="mt-16 bg-white p-8 rounded-lg shadow-lg"
+          className="mt-16 p-8 rounded-lg shadow-lg" style={{ backgroundColor: '#F0EDE5' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -160,8 +159,7 @@ const WhySection: React.FC = () => {
           <h3 className="text-2xl font-bold mb-4 text-center">Why This Matters Now</h3>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h4 className="font-semibold text-lg mb-3 flex items-center">
-                <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />
+              <h4 className="font-semibold text-lg mb-3" style={{ color: '#5A6B4F' }}>
                 The Urgency
               </h4>
               <p className="text-gray-700">
@@ -169,8 +167,7 @@ const WhySection: React.FC = () => {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-lg mb-3 flex items-center">
-                <TrendingUp className="w-5 h-5 text-green-500 mr-2" />
+              <h4 className="font-semibold text-lg mb-3" style={{ color: '#5A6B4F' }}>
                 The Opportunity
               </h4>
               <p className="text-gray-700">

@@ -11,8 +11,8 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-green-50">
-      <div className="container mx-auto px-6 text-center">
+    <section className="py-20 h-screen" style={{ background: 'linear-gradient(to bottom right, #F5F3ED, #F0EDE5, #E8E4D8)' }}>
+      <div className="container mx-auto px-6 text-center h-full flex flex-col justify-center">
         <motion.h1 
           className="text-4xl md:text-6xl font-bold text-[#333333] leading-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,8 @@ const Hero: React.FC = () => {
         >
           <button
             onClick={scrollToWhy}
-            className="text-gray-500 hover:text-[#4A5568] transition-colors duration-300 animate-bounce"
+            className="transition-colors duration-300 animate-bounce"
+            style={{ color: '#7A8B6F' }}
           >
             <ChevronDown className="w-8 h-8 mx-auto" />
           </button>

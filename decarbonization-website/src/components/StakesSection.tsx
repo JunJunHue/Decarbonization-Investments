@@ -11,21 +11,21 @@ const StakesSection: React.FC = () => {
       title: 'Tech\'s Renewable Energy Push (2010s)',
       description: 'Major tech companies initiated long-term Power Purchase Agreements (PPAs) for renewable energy, effectively paying an initial premium to stimulate and expand the market for clean power.',
       result: 'Corporate clean energy purchasing surged 100-fold within ten years, while solar costs plummeted by approximately 71% and wind power by 47%, fundamentally transforming the global electricity industry.',
-      icon: '⚡'
+      icon: ''
     },
     {
       id: 'ibm',
       title: 'IBM\'s "Bet-the-Business" System/360 (1964)',
       description: 'IBM made an audacious $5 billion investment (over $35 billion in today\'s currency) to develop the System/360 mainframe computer family.',
       result: 'By 1966, IBM was shipping 1,000 System/360 units monthly, and the architecture became the de facto standard for decades, cementing IBM\'s dominance of the IT industry.',
-      icon: '💻'
+      icon: ''
     },
     {
       id: 'amazon',
       title: 'Amazon\'s Infrastructure-First Growth Strategy (2000s)',
       description: 'Amazon famously operated for years with minimal profit, relentlessly reinvesting revenue into long-term infrastructure: warehouses, distribution networks, and cloud data centers.',
       result: 'These early, costly investments profoundly shaped today\'s e-commerce and cloud computing landscapes, establishing Amazon\'s global dominance.',
-      icon: '📦'
+      icon: ''
     }
   ];
 
@@ -92,7 +92,7 @@ const StakesSection: React.FC = () => {
   ];
 
   return (
-    <section id="stakes" className="py-20 bg-white">
+    <section id="stakes" className="py-20" style={{ backgroundColor: '#F0EDE5' }}>
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-12"
@@ -118,8 +118,7 @@ const StakesSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold text-red-700 mb-6 text-center flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 mr-2" />
+            <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#5A6B4F' }}>
               The Cost of Inaction
             </h3>
             <div className="space-y-4">
@@ -132,11 +131,10 @@ const StakesSection: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <cost.icon className={`w-5 h-5 mt-1 flex-shrink-0 ${cost.color}`} />
                   <div>
-                    <strong className="block text-red-800">{cost.title}:</strong>
-                    <p className="text-red-700 text-sm mt-1">{cost.description}</p>
-                    <p className="text-red-600 text-sm mt-1 italic">{cost.example}</p>
+                    <strong className="block" style={{ color: '#5A6B4F' }}>{cost.title}:</strong>
+                    <p className="text-sm mt-1" style={{ color: '#6B7A5F' }}>{cost.description}</p>
+                    <p className="text-sm mt-1 italic" style={{ color: '#7A8B6F' }}>{cost.example}</p>
                   </div>
                 </motion.div>
               ))}
@@ -145,14 +143,13 @@ const StakesSection: React.FC = () => {
 
           {/* Rewards of Leadership */}
           <motion.div 
-            className="bg-green-50 p-8 rounded-lg border-l-4 border-green-500"
+            className="p-8 rounded-lg border-l-4" style={{ backgroundColor: '#F0EDE5', borderColor: '#7A8B6F' }}
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold text-green-700 mb-6 text-center flex items-center justify-center">
-              <CheckCircle className="w-6 h-6 mr-2" />
+            <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#5A6B4F' }}>
               The Rewards of Leadership
             </h3>
             
@@ -169,12 +166,12 @@ const StakesSection: React.FC = () => {
                         : 'text-green-500 hover:text-green-700'
                     }`}
                   >
-                    {precedent.icon} {precedent.title.split(' ')[0]}
+                    {precedent.title.split(' ')[0]}
                   </button>
                 ))}
               </div>
               
-              <div className="bg-white p-4 rounded-lg">
+              <div className="p-4 rounded-lg" style={{ backgroundColor: '#F0EDE5' }}>
                 {precedents.map((precedent) => (
                   <div
                     key={precedent.id}
@@ -201,11 +198,10 @@ const StakesSection: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <reward.icon className={`w-5 h-5 mt-1 flex-shrink-0 ${reward.color}`} />
                   <div>
-                    <strong className="block text-green-800">{reward.title}</strong>
-                    <p className="text-green-700 text-sm mt-1">{reward.description}</p>
-                    <p className="text-green-600 text-sm mt-1 italic">{reward.benefit}</p>
+                    <strong className="block" style={{ color: '#5A6B4F' }}>{reward.title}</strong>
+                    <p className="text-sm mt-1" style={{ color: '#6B7A5F' }}>{reward.description}</p>
+                    <p className="text-sm mt-1 italic" style={{ color: '#7A8B6F' }}>{reward.benefit}</p>
                   </div>
                 </motion.div>
               ))}
@@ -215,18 +211,17 @@ const StakesSection: React.FC = () => {
 
         {/* Key Takeaway */}
         <motion.div 
-          className="mt-16 bg-gradient-to-r from-blue-50 to-green-50 p-8 rounded-lg border border-blue-200"
+          className="mt-16 p-8 rounded-lg border" style={{ backgroundColor: '#E8E4D8', borderColor: '#C4B89A' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="text-center">
-            <Clock className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-blue-800 mb-4">
+            <h3 className="text-2xl font-bold mb-4" style={{ color: '#5A6B4F' }}>
               The Time to Act is Now
             </h3>
-            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: '#6B7A5F' }}>
               The next few years (2025-2030) are the window for action to set heavy industry on a new course. 
               Hyperscale data center firms, due to their scale and resources, have an outsized ability—and arguably 
               responsibility—to act in this window. Inaction means likely missing climate targets and facing both 

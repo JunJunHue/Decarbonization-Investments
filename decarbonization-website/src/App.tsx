@@ -7,6 +7,7 @@ import StakesSection from './components/StakesSection';
 import SolutionsSection from './components/SolutionsSection';
 import PlayersSection from './components/PlayersSection';
 import StrategySection from './components/StrategySection';
+import DataCenterPredictor from './components/DataCenterPredictor';
 import Footer from './components/Footer';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <SolutionsSection />
         <PlayersSection />
         <StrategySection />
+        <DataCenterPredictor />
       </main>
       <Footer />
     </div>

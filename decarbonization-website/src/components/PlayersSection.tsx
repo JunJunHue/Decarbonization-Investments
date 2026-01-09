@@ -9,8 +9,8 @@ const PlayersSection: React.FC = () => {
     {
       id: 'google',
       name: 'Google',
-      logo: 'https://placehold.co/150x80/E8F0FE/4285F4?text=Google',
-      color: '#4285F4',
+      logo: 'https://placehold.co/150x80/F5E6E6/D4A5A5?text=Google',
+      color: '#7A8B6F',
       climateGoal: 'Net-zero emissions across all operations and value chain by 2030',
       keyInitiatives: [
         'Joined the Sustainable Steel Buyers Platform in 2023',
@@ -29,8 +29,8 @@ const PlayersSection: React.FC = () => {
     {
       id: 'microsoft',
       name: 'Microsoft',
-      logo: 'https://placehold.co/150x80/E5F2FB/00A4EF?text=Microsoft',
-      color: '#00A4EF',
+      logo: 'https://placehold.co/150x80/F5E6E6/D4A5A5?text=Microsoft',
+      color: '#7A8B6F',
       climateGoal: 'Carbon negative by 2030, removing all CO₂ ever emitted by 2050',
       keyInitiatives: [
         'Established $1 billion Climate Innovation Fund',
@@ -49,8 +49,8 @@ const PlayersSection: React.FC = () => {
     {
       id: 'meta',
       name: 'Meta',
-      logo: 'https://placehold.co/150x80/E6F3FF/0062E0?text=Meta',
-      color: '#0062E0',
+      logo: 'https://placehold.co/150x80/F5E6E6/D4A5A5?text=Meta',
+      color: '#7A8B6F',
       climateGoal: 'Net-zero emissions across value chain by 2030, net-zero embodied carbon in new buildings by 2030',
       keyInitiatives: [
         'Leader in low-carbon concrete deployment',
@@ -70,8 +70,8 @@ const PlayersSection: React.FC = () => {
     {
       id: 'apple',
       name: 'Apple',
-      logo: 'https://placehold.co/150x80/F5F5F7/A2AAAD?text=Apple',
-      color: '#A2AAAD',
+      logo: 'https://placehold.co/150x80/F5E6E6/D4A5A5?text=Apple',
+      color: '#7A8B6F',
       climateGoal: '100% carbon neutrality for supply chain and products by 2030',
       keyInitiatives: [
         'Invested in Elysis joint venture for carbon-free aluminum',
@@ -99,7 +99,7 @@ const PlayersSection: React.FC = () => {
   };
 
   return (
-    <section id="players" className="py-20 bg-white">
+    <section id="players" className="py-20" style={{ backgroundColor: '#F0EDE5' }}>
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-12"
@@ -128,7 +128,7 @@ const PlayersSection: React.FC = () => {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <div className="bg-white rounded-lg shadow-lg p-6 transition-all duration-300 group-hover:shadow-xl">
+              <div className="rounded-lg shadow-lg p-6 transition-all duration-300 group-hover:shadow-xl" style={{ backgroundColor: '#F5F3ED' }}>
                 <img 
                   src={company.logo} 
                   alt={`${company.name} Logo`} 
@@ -136,8 +136,8 @@ const PlayersSection: React.FC = () => {
                 />
                 <div className="mt-4">
                   <company.icon className={`w-8 h-8 mx-auto mb-2`} style={{ color: company.color }} />
-                  <p className="font-semibold text-lg">{company.name}</p>
-                  <p className="text-sm text-gray-500 mt-1">Click to learn more</p>
+                  <p className="font-semibold text-lg" style={{ color: '#5A6B4F' }}>{company.name}</p>
+                  <p className="text-sm mt-1" style={{ color: '#7A8B6F' }}>Click to learn more</p>
                 </div>
               </div>
             </motion.div>
@@ -146,18 +146,17 @@ const PlayersSection: React.FC = () => {
 
         {/* Key Insights */}
         <motion.div 
-          className="mt-16 bg-gradient-to-r from-blue-50 to-green-50 p-8 rounded-lg border border-blue-200"
+          className="mt-16 p-8 rounded-lg border" style={{ backgroundColor: '#F5E6E6', borderColor: '#E8D4D4' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="text-center">
-            <Target className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-blue-800 mb-4">
+            <h3 className="text-2xl font-bold mb-4" style={{ color: '#E8D4D4' }}>
               The Power of Corporate Leadership
             </h3>
-            <p className="text-blue-700 text-lg max-w-4xl mx-auto">
+            <p className="text-lg max-w-4xl mx-auto" style={{ color: '#E8D4D4' }}>
               These companies have the financial muscle to deploy capital at a scale that matches the $3.5 trillion per year investment the global net-zero transition requires. By acting as market makers for green commodities, they can replicate their success with renewable energy and accelerate the decarbonization of heavy industry.
             </p>
           </div>
@@ -175,7 +174,7 @@ const PlayersSection: React.FC = () => {
             onClick={closeModal}
           >
             <motion.div
-              className="bg-white rounded-lg shadow-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="rounded-lg shadow-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F3ED' }}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -204,55 +203,51 @@ const PlayersSection: React.FC = () => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h4 className="font-bold text-xl mb-4 flex items-center">
-                          <Target className="w-5 h-5 mr-2 text-green-600" />
+                        <h4 className="font-bold text-xl mb-4" style={{ color: '#5A6B4F' }}>
                           Climate Goal
                         </h4>
-                        <p className="text-gray-700 mb-6 p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <p className="mb-6 p-4 rounded-lg border-l-4" style={{ backgroundColor: '#E8E4D8', borderColor: '#7A8B6F', color: '#6B7A5F' }}>
                           {company.climateGoal}
                         </p>
 
-                        <h4 className="font-bold text-xl mb-4 flex items-center">
-                          <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
+                        <h4 className="font-bold text-xl mb-4" style={{ color: '#5A6B4F' }}>
                           Key Initiatives
                         </h4>
                         <ul className="space-y-3">
                           {company.keyInitiatives.map((initiative, index) => (
                             <li key={index} className="flex items-start space-x-3">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                              <span className="text-gray-700">{initiative}</span>
+                              <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#7A8B6F' }}></div>
+                              <span style={{ color: '#6B7A5F' }}>{initiative}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
                       <div>
-                        <h4 className="font-bold text-xl mb-4 flex items-center">
-                          <Leaf className="w-5 h-5 mr-2 text-green-600" />
+                        <h4 className="font-bold text-xl mb-4" style={{ color: '#5A6B4F' }}>
                           Recent Actions
                         </h4>
                         <ul className="space-y-3 mb-6">
                           {company.recentActions.map((action, index) => (
                             <li key={index} className="flex items-start space-x-3">
-                              <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                              <span className="text-gray-700">{action}</span>
+                              <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#7A8B6F' }}></div>
+                              <span style={{ color: '#6B7A5F' }}>{action}</span>
                             </li>
                           ))}
                         </ul>
 
-                        <h4 className="font-bold text-xl mb-4 flex items-center">
-                          <Zap className="w-5 h-5 mr-2 text-purple-600" />
+                        <h4 className="font-bold text-xl mb-4" style={{ color: '#5A6B4F' }}>
                           Investment Focus
                         </h4>
-                        <p className="text-gray-700 p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                        <p className="p-4 rounded-lg border-l-4" style={{ backgroundColor: '#E8E4D8', borderColor: '#7A8B6F', color: '#6B7A5F' }}>
                           {company.investmentFocus}
                         </p>
                       </div>
                     </div>
 
-                    <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-                      <h4 className="font-bold text-lg mb-2">Strategic Impact</h4>
-                      <p className="text-gray-700 text-sm">
+                    <div className="mt-8 p-4 rounded-lg" style={{ backgroundColor: '#E8E4D8' }}>
+                      <h4 className="font-bold text-lg mb-2" style={{ color: '#5A6B4F' }}>Strategic Impact</h4>
+                      <p className="text-sm" style={{ color: '#6B7A5F' }}>
                         {company.name} demonstrates how hyperscalers can leverage their procurement power and capital to achieve economies of scale for nascent decarbonization technologies. Their approach serves as a template for other companies looking to accelerate their climate goals through upstream investment.
                       </p>
                     </div>
