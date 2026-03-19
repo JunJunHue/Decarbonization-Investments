@@ -1,6 +1,5 @@
 {
-  "rootDirectory": "decarbonization-website",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "framework": "create-react-app"
+  "installCommand": "cd decarbonization-website && npm install",
+  "buildCommand": "cd decarbonization-website && npm run build",
+  "outputDirectory": "decarbonization-website/build"
 }
