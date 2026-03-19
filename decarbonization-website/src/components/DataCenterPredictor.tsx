@@ -4,7 +4,7 @@ import {
   ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
-import { TrendingUp, TrendingDown, Activity, Zap, Database, RefreshCw, AlertTriangle, BarChart2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Activity, Zap, RefreshCw, AlertTriangle, BarChart2 } from 'lucide-react';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
