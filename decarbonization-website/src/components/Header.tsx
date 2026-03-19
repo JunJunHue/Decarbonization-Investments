@@ -24,9 +24,9 @@ const Header: React.FC = () => {
   return (
     <header className="backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300" style={{ backgroundColor: 'rgba(245, 243, 237, 0.8)' }}>
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#" className="text-xl font-bold" style={{ color: '#5A6B4F' }}>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xl font-bold bg-transparent border-0 cursor-pointer p-0" style={{ color: '#5A6B4F' }}>
           HyperScale, HyperImpact
-        </a>
+        </button>
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">

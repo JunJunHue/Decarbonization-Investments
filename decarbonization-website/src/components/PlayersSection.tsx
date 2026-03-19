@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Target, TrendingUp, Leaf, Zap, Building, Globe } from 'lucide-react';
+import { X, Leaf, Zap, Building, Globe } from 'lucide-react';
 
 const PlayersSection: React.FC = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null);

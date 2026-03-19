@@ -79,7 +79,7 @@ const DataCenterPredictor: React.FC = () => {
     }
   }, [monthsAhead, activeScenario, simMode]);
 
-  useEffect(() => { runSimulation(); }, [monthsAhead]);
+  useEffect(() => { runSimulation(); }, [runSimulation]);
 
   // ---- Chart data -------------------------------------------------------
   const buildFanData = (result: SimResult) => {

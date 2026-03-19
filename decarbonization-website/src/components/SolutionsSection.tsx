@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Cell } from 'recharts';
-import { 
-  HardHat, 
-  Droplets, 
-  Zap, 
-  Cpu, 
-  Magnet, 
-  TrendingUp, 
-  DollarSign,
-  Leaf,
+import {
+  HardHat,
+  Zap,
+  Cpu,
+  Magnet,
   Factory,
-  Gauge,
   RefreshCw
 } from 'lucide-react';
 
@@ -22,11 +17,7 @@ const SolutionsSection: React.FC = () => {
   
   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
   
-  useEffect(() => {
-    fetchMaterialData();
-  }, []);
-  
-  const fetchMaterialData = async () => {
+  const fetchMaterialData = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/material-data`);
@@ -41,8 +32,12 @@ const SolutionsSection: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-  
+  }, [API_BASE_URL]);
+
+  useEffect(() => {
+    fetchMaterialData();
+  }, [fetchMaterialData]);
+
   const getInvestmentData = (materialId: string) => {
     // Investment data with actual dollar amounts and clearer representation
     // Shows: Required Investment, Recent Funding, Remaining Gap

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, Globe, TrendingUp } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
