@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-import { Shield, Award, Target, Zap, TrendingUp, AlertTriangle } from 'lucide-react';
+import { Shield, Award, Target, Zap } from 'lucide-react';
 
 const WhySection: React.FC = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);

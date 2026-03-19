@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell,
 } from 'recharts';
-import { TrendingUp, TrendingDown, RefreshCw, Zap, Activity, Radio } from 'lucide-react';
+import { RefreshCw, Radio } from 'lucide-react';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
@@ -117,7 +117,7 @@ const TickerDashboard: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   // Group tickers by sector
   const tickersBySector = Object.values(tickers).reduce<Record<string, TickerData[]>>((acc, t) => {
