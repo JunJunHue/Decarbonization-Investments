@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { AlertTriangle, CheckCircle, Clock, DollarSign, Users, Award } from 'lucide-react';
+import { AlertTriangle, CheckCircle, DollarSign, Users, Award } from 'lucide-react';
 
 const StakesSection: React.FC = () => {
   const [activePrecedent, setActivePrecedent] = useState('renewables');

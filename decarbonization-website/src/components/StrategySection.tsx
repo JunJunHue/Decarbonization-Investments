@@ -8,10 +8,7 @@ import {
   BarChart3, 
   Rocket,
   CheckCircle,
-  ArrowRight,
-  Lightbulb,
-  Target,
-  TrendingUp
+  ArrowRight
 } from 'lucide-react';
 
 const StrategySection: React.FC = () => {
