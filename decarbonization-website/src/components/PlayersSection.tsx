@@ -146,17 +146,17 @@ const PlayersSection: React.FC = () => {
 
         {/* Key Insights */}
         <motion.div 
-          className="mt-16 p-8 rounded-lg border" style={{ backgroundColor: '#F5E6E6', borderColor: '#E8D4D4' }}
+          className="mt-16 p-8 rounded-lg border" style={{ backgroundColor: '#E8E4D8', borderColor: '#7A8B6F' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4" style={{ color: '#E8D4D4' }}>
+            <h3 className="text-2xl font-bold mb-4" style={{ color: '#5A6B4F' }}>
               The Power of Corporate Leadership
             </h3>
-            <p className="text-lg max-w-4xl mx-auto" style={{ color: '#E8D4D4' }}>
+            <p className="text-lg max-w-4xl mx-auto" style={{ color: '#6B7A5F' }}>
               These companies have the financial muscle to deploy capital at a scale that matches the $3.5 trillion per year investment the global net-zero transition requires. By acting as market makers for green commodities, they can replicate their success with renewable energy and accelerate the decarbonization of heavy industry.
             </p>
           </div>

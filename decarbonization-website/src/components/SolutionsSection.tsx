@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Cell } from 'recharts';
 import { 
   HardHat, 
   Droplets, 
@@ -44,30 +44,39 @@ const SolutionsSection: React.FC = () => {
   };
   
   const getInvestmentData = (materialId: string) => {
-    // Real investment gap data based on IEA and industry reports
-    // Investment Gap represents the percentage of required investment still needed
-    // Recent Funding represents the percentage of required investment secured in recent years
-    const realData: { [key: string]: any[] } = {
-      'steel': [
-        { name: 'Investment Gap', value: 85, color: '#C4B89A' }, // $6B/year needed, significant gap remains
-        { name: 'Recent Funding', value: 15, color: '#7A8B6F' } // Limited recent funding despite need
-      ],
-      'cement': [
-        { name: 'Investment Gap', value: 90, color: '#C4B89A' }, // $1-1.5T needed by 2050, most unfunded
-        { name: 'Recent Funding', value: 10, color: '#7A8B6F' } // Terra CO2 $124.5M, Carbon Upcycling $18M - small relative to need
-      ],
-      'aluminum': [
-        { name: 'Investment Gap', value: 80, color: '#C4B89A' }, // $500B-$1.5T needed, AI data centers increasing demand
-        { name: 'Recent Funding', value: 20, color: '#7A8B6F' } // Some progress but supply chain resilience issues
-      ],
-      'copper': [
-        { name: 'Investment Gap', value: 75, color: '#C4B89A' }, // Substantial shortfall widening, $100B+ needed
-        { name: 'Recent Funding', value: 25, color: '#7A8B6F' } // Edge Copper $17M, but gap is massive
-      ],
-      'rare-earths': [
-        { name: 'Investment Gap', value: 70, color: '#C4B89A' }, // US narrowing gap but China still 60% by 2030
-        { name: 'Recent Funding', value: 30, color: '#7A8B6F' } // Apple $500M to MP Materials, $8.5B US-Australia deal
-      ]
+    // Investment data with actual dollar amounts and clearer representation
+    // Shows: Required Investment, Recent Funding, Remaining Gap
+    const investmentAmounts: { [key: string]: { required: number, recent: number, gap: number, unit: string } } = {
+      'steel': {
+        required: 6000, // $6B/year
+        recent: 200, // ~$200M recent funding
+        gap: 5800, // $5.8B gap
+        unit: 'M' // Millions
+      },
+      'cement': {
+        required: 1500000, // $1.5T needed by 2050, show as $1500B
+        recent: 143, // $124.5M + $18M = ~$143M
+        gap: 1499857, // Massive gap
+        unit: 'M' // Millions (for recent), but scale will show this differently
+      },
+      'aluminum': {
+        required: 500000, // $500B needed, show as $500B
+        recent: 500, // Estimated from recent deals
+        gap: 499500, // $499.5B gap
+        unit: 'M' // Millions
+      },
+      'copper': {
+        required: 100000, // $100B needed
+        recent: 17, // Edge Copper $17M
+        gap: 99983, // $99.983B gap
+        unit: 'M' // Millions
+      },
+      'rare-earths': {
+        required: 8500, // $8.5B US-Australia deal shows scale
+        recent: 9000, // Apple $500M + $8.5B = $9B
+        gap: 0, // Actually meeting demand, but China still dominates
+        unit: 'M' // Millions
+      }
     };
     
     // Map frontend IDs to API IDs
@@ -80,22 +89,64 @@ const SolutionsSection: React.FC = () => {
     };
     
     const apiId = apiIdMap[materialId] || materialId;
+    const amounts = investmentAmounts[materialId] || investmentAmounts['steel'];
     
-    // Use real data as defaults, override with API data if available
-    if (!materialData || !materialData[apiId]) {
-      return realData[materialId] || realData['steel'];
-    }
+    // Convert to percentage for visual comparison (normalized to required investment)
+    const required = amounts.required;
+    const recent = amounts.recent;
+    const gap = amounts.gap;
     
-    // If API provides investment metrics, use them; otherwise use real data
-    if (materialData[apiId].investment_metrics) {
+    // Calculate percentages based on required investment (scale to 100%)
+    const recentPct = Math.min(100, (recent / required) * 100);
+    const gapPct = Math.min(100, (gap / required) * 100);
+    
+    // Format amounts for display
+    const formatAmount = (val: number) => {
+      if (val >= 1000000) return `$${(val / 1000000).toFixed(1)}T`;
+      if (val >= 1000) return `$${(val / 1000).toFixed(1)}B`;
+      return `$${val.toFixed(0)}M`;
+    };
+    
+    // Use API data if available, otherwise use hardcoded data
+    let finalData = [
+      { 
+        name: 'Required Investment', 
+        value: 100, 
+        actualValue: required,
+        formattedValue: formatAmount(required),
+        color: '#D4C9B0' // Light background color
+      },
+      { 
+        name: 'Recent Funding', 
+        value: recentPct, 
+        actualValue: recent,
+        formattedValue: formatAmount(recent),
+        color: '#9CAF88' // Green - positive
+      },
+      { 
+        name: 'Investment Gap', 
+        value: gapPct, 
+        actualValue: gap,
+        formattedValue: formatAmount(gap),
+        color: '#C4B89A' // Warning color
+      }
+    ];
+    
+    // If API provides investment metrics, try to incorporate them
+    if (materialData && materialData[apiId] && materialData[apiId].investment_metrics) {
       const metrics = materialData[apiId].investment_metrics;
-      return [
-        { name: 'Investment Gap', value: metrics.investment_gap || realData[materialId][0].value, color: '#C4B89A' },
-        { name: 'Recent Funding', value: metrics.recent_funding || realData[materialId][1].value, color: '#7A8B6F' }
-      ];
+      // Scale API percentages to our dollar amounts
+      if (metrics.recent_funding && metrics.investment_gap) {
+        const apiRecentPct = metrics.recent_funding;
+        const apiGapPct = metrics.investment_gap;
+        
+        // Adjust based on API data (use API as multiplier)
+        finalData[1].value = Math.min(100, recentPct * (apiRecentPct / 15)); // Scale from API's base
+        finalData[2].value = Math.min(100, gapPct * (apiGapPct / 85)); // Scale from API's base
+      }
     }
     
-    return realData[materialId] || realData['steel'];
+    return finalData;
   };
   
   const getMaterialDataForTab = (materialId: string) => {
@@ -127,7 +178,7 @@ const SolutionsSection: React.FC = () => {
       ],
       investmentData: [
         { name: 'Investment Gap', value: 85, color: '#C4B89A' },
-        { name: 'Recent Funding', value: 15, color: '#7A8B6F' }
+        { name: 'Recent Funding', value: 15, color: '#9CAF88' }
       ],
       investmentText: 'Achieving net-zero steel requires approximately $6 billion per year for low-CO₂ technologies, with an additional $2 trillion for supporting infrastructure through 2050. Despite progress, decarbonization remains stagnant in many regions, with significant investment gaps persisting.',
       impact: 'Replacing coal-based steel with near-zero carbon steel can cut emissions per ton by 85-95%.'
@@ -150,7 +201,7 @@ const SolutionsSection: React.FC = () => {
       ],
       investmentData: [
         { name: 'Investment Gap', value: 90, color: '#C4B89A' },
-        { name: 'Recent Funding', value: 10, color: '#7A8B6F' }
+        { name: 'Recent Funding', value: 10, color: '#9CAF88' }
       ],
       investmentText: 'Transforming the global cement industry by 2050 will require approximately $1–1.5 trillion in cumulative investment. Recent funding (Terra CO2 $124.5M, Carbon Upcycling $18M) represents only a fraction of the massive investment needed.',
       impact: 'Implementing a portfolio of solutions can achieve 30-70% CO₂ reduction per concrete mix, and cumulatively avoid 98 gigatons of CO₂ from 2022-2050.'
@@ -172,7 +223,7 @@ const SolutionsSection: React.FC = () => {
       ],
       investmentData: [
         { name: 'Investment Gap', value: 80, color: '#C4B89A' },
-        { name: 'Recent Funding', value: 20, color: '#7A8B6F' }
+        { name: 'Recent Funding', value: 20, color: '#9CAF88' }
       ],
       investmentText: 'Fully decarbonizing the global aluminum sector could require cumulative investments ranging from $500 billion to $1.5 trillion. AI data centers are creating massive demand, exposing supply chain resilience vulnerabilities and highlighting the urgent need for investment.',
       impact: 'Using 100% renewable electricity can reduce CO₂ footprint by ~75%; inert anode technology can achieve potentially zero direct CO₂ emissions.'
@@ -194,7 +245,7 @@ const SolutionsSection: React.FC = () => {
       ],
       investmentData: [
         { name: 'Investment Gap', value: 75, color: '#C4B89A' },
-        { name: 'Recent Funding', value: 25, color: '#7A8B6F' }
+        { name: 'Recent Funding', value: 25, color: '#9CAF88' }
       ],
       investmentText: 'The copper industry requires over $100 billion globally to decarbonize, encompassing new processes and clean power sources. A substantial shortfall in copper supply is widening, with recent funding (Edge Copper $17M) insufficient to address the massive gap.',
       impact: 'A 40% emissions cut via leaching translates to saving approximately 1–2 tons of CO₂ per tonne of copper produced.'
@@ -216,7 +267,7 @@ const SolutionsSection: React.FC = () => {
       ],
       investmentData: [
         { name: 'Investment Gap', value: 70, color: '#C4B89A' },
-        { name: 'Recent Funding', value: 30, color: '#7A8B6F' }
+        { name: 'Recent Funding', value: 30, color: '#9CAF88' }
       ],
       investmentText: 'Building a diversified, clean rare earth supply chain requires recreating an industry that largely migrated offshore. The US is narrowing its rare earth gap and could meet 95% of its own demand by 2030, but China will still supply 60% globally. Recent investments include Apple\'s $500M commitment to MP Materials and an $8.5B US-Australia rare earth agreement.',
       impact: 'Recycled magnets exhibit nearly 10× lower energy demand than magnets from mined material, leading to significantly lower CO₂ emissions.'
@@ -334,90 +385,140 @@ const SolutionsSection: React.FC = () => {
                   </button>
                 </div>
                 
-                {/* Investment Metrics Bar Chart - Always show, data is always available */}
+                {/* Investment Metrics Bar Chart - Shows Required, Recent Funding, and Gap */}
                 <div className="p-4 rounded-lg mb-4" style={{ backgroundColor: '#E8E4D8' }}>
                   <h5 className="text-sm font-semibold mb-2" style={{ color: '#5A6B4F' }}>Investment Metrics</h5>
-                  {currentInvestmentData && currentInvestmentData.length > 0 ? (
-                    <ResponsiveContainer width="100%" height={150}>
-                      <BarChart data={currentInvestmentData} layout="horizontal">
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis type="number" domain={[0, 100]} />
-                        <YAxis dataKey="name" type="category" width={120} />
-                        <Tooltip 
-                          formatter={(value: number | undefined) => [`${value ?? 0}%`, 'Index']}
-                          labelFormatter={() => 'Investment Gap vs Recent Funding'}
-                        />
-                        <Bar dataKey="value" fill="#7A8B6F" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    <div className="text-center py-8" style={{ color: '#7A8B6F' }}>
-                      <p>No investment data available</p>
-                    </div>
-                  )}
+                  <p className="text-xs mb-3" style={{ color: '#6B7A5F' }}>Comparison of required investment, recent funding secured, and remaining gap</p>
+                  <ResponsiveContainer width="100%" height={220}>
+                    <BarChart data={currentInvestmentData} layout="horizontal" margin={{ top: 5, right: 40, left: 160, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#C4B89A" />
+                      <XAxis 
+                        type="number" 
+                        domain={[0, 100]} 
+                        stroke="#7A8B6F"
+                        tick={{ fill: '#5A6B4F', fontSize: 11 }}
+                        label={{ value: 'Relative Scale (%)', position: 'insideBottom', offset: -5, style: { fill: '#5A6B4F', fontSize: 11 } }}
+                      />
+                      <YAxis 
+                        dataKey="name" 
+                        type="category" 
+                        width={150} 
+                        stroke="#7A8B6F"
+                        tick={{ fill: '#5A6B4F', fontSize: 11 }}
+                      />
+                      <Tooltip 
+                        formatter={(value: number | undefined, name?: string, props?: any) => {
+                          // Access the payload data correctly
+                          const payload = props?.payload || props;
+                          if (payload && payload.formattedValue) {
+                            return [payload.formattedValue, payload.name || name || ''];
+                          }
+                          // Fallback to percentage if no formatted value
+                          return [`${value?.toFixed(1) ?? 0}%`, name || ''];
+                        }}
+                        labelFormatter={() => 'Investment Metrics'}
+                        contentStyle={{ backgroundColor: '#F5F3ED', border: '1px solid #C4B89A', borderRadius: '4px', padding: '10px' }}
+                        cursor={{ fill: 'rgba(196, 184, 154, 0.1)' }}
+                      />
+                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                        {currentInvestmentData.map((entry: any, index: number) => (
+                          <Cell key={`cell-${index}`} fill={entry.color || '#7A8B6F'} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
                 
-                {currentInvestmentData && currentInvestmentData.length > 0 && (
-                  <>
+                {/* Price Trend Line Chart */}
+                <div className="p-4 rounded-lg mb-4" style={{ backgroundColor: '#E8E4D8' }}>
+                  <h5 className="text-sm font-semibold mb-2" style={{ color: '#5A6B4F' }}>Price Trend (90 Days)</h5>
+                  {(() => {
+                    const marketData = getMaterialDataForTab(activeTab);
+                    const historical = marketData?.market_data?.historical;
                     
-                    {/* Price Trend Line Chart */}
-                    {(() => {
-                      const marketData = getMaterialDataForTab(activeTab);
-                      const historical = marketData?.market_data?.historical;
-                      
-                      if (historical && historical.length > 0) {
-                        const chartData = historical.map((item: any) => ({
-                          date: new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-                          price: item.price
-                        }));
+                    if (historical && Array.isArray(historical) && historical.length > 0) {
+                      try {
+                        // Parse and format historical data
+                        const chartData = historical
+                          .filter((item: any) => item && item.date && item.price !== undefined && item.price !== null)
+                          .map((item: any) => {
+                            const date = new Date(item.date);
+                            if (isNaN(date.getTime())) {
+                              return null;
+                            }
+                            return {
+                              date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                              price: parseFloat(item.price),
+                              fullDate: date // Keep for sorting
+                            };
+                          })
+                          .filter((item: any) => item !== null)
+                          .sort((a: any, b: any) => a.fullDate.getTime() - b.fullDate.getTime()); // Sort by date
                         
-                        return (
-                          <div className="p-4 rounded-lg mb-4" style={{ backgroundColor: '#E8E4D8' }}>
-                            <h5 className="text-sm font-semibold mb-2" style={{ color: '#5A6B4F' }}>Price Trend (90 Days)</h5>
-                            <ResponsiveContainer width="100%" height={200}>
-                              <LineChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis 
-                                  dataKey="date" 
-                                  angle={-45}
-                                  textAnchor="end"
-                                  height={60}
-                                  interval="preserveStartEnd"
-                                />
-                                <YAxis 
-                                  label={{ value: 'Price', angle: -90, position: 'insideLeft' }}
-                                />
-                                <Tooltip 
-                                  formatter={(value: number | undefined) => [`$${(value ?? 0).toFixed(2)}`, 'Price']}
-                                />
-                                <Line 
-                                  type="monotone" 
-                                  dataKey="price" 
-                                  stroke={materialWithData.color} 
-                                  strokeWidth={2}
-                                  dot={false}
-                                  activeDot={{ r: 4 }}
-                                />
-                              </LineChart>
-                            </ResponsiveContainer>
-                            {marketData && marketData.market_data && (
-                              <p className="text-xs text-gray-500 mt-2 text-center">
-                                Market: {marketData.market_data.source} | 
-                                Current: ${marketData.market_data.current_price?.toFixed(2)} | 
-                                Change: {marketData.market_data.price_change_30d?.toFixed(1)}% (30d)
-                              </p>
-                            )}
-                          </div>
-                        );
+                        if (chartData.length > 0) {
+                          return (
+                            <>
+                              <ResponsiveContainer width="100%" height={200}>
+                                <LineChart data={chartData}>
+                                  <CartesianGrid strokeDasharray="3 3" stroke="#C4B89A" />
+                                  <XAxis 
+                                    dataKey="date" 
+                                    angle={-45}
+                                    textAnchor="end"
+                                    height={60}
+                                    interval="preserveStartEnd"
+                                    stroke="#7A8B6F"
+                                    tick={{ fill: '#5A6B4F', fontSize: 10 }}
+                                  />
+                                  <YAxis 
+                                    label={{ value: 'Price ($)', angle: -90, position: 'insideLeft', style: { fill: '#5A6B4F', fontSize: 11 } }}
+                                    stroke="#7A8B6F"
+                                    tick={{ fill: '#5A6B4F', fontSize: 11 }}
+                                  />
+                                  <Tooltip 
+                                    formatter={(value: number | undefined) => [`$${(value ?? 0).toFixed(2)}`, 'Price']}
+                                    labelFormatter={(label) => `Date: ${label}`}
+                                    contentStyle={{ backgroundColor: '#F5F3ED', border: '1px solid #C4B89A', borderRadius: '4px', padding: '8px' }}
+                                  />
+                                  <Line 
+                                    type="monotone" 
+                                    dataKey="price" 
+                                    stroke={materialWithData?.color || '#7A8B6F'} 
+                                    strokeWidth={2}
+                                    dot={false}
+                                    activeDot={{ r: 4, fill: materialWithData?.color || '#7A8B6F' }}
+                                  />
+                                </LineChart>
+                              </ResponsiveContainer>
+                              {marketData && marketData.market_data && (
+                                <p className="text-xs mt-2 text-center" style={{ color: '#7A8B6F' }}>
+                                  Market: {marketData.market_data.source || 'N/A'} | 
+                                  Current: ${marketData.market_data.current_price?.toFixed(2) || 'N/A'} | 
+                                  Change: {marketData.market_data.price_change_30d?.toFixed(1) || 'N/A'}% (30d) | 
+                                  Data Points: {chartData.length}
+                                </p>
+                              )}
+                            </>
+                          );
+                        }
+                      } catch (error) {
+                        console.error('Error processing historical data:', error);
                       }
-                      return null;
-                    })()}
-                  </>
-                ) : (
-                  <div className="p-4 rounded-lg mb-4 text-center" style={{ backgroundColor: '#E8E4D8', color: '#6B7A5F' }}>
-                    {loading ? 'Loading market data...' : 'Market data unavailable. Click refresh to try again.'}
-                  </div>
-                )}
+                    }
+                    
+                    // Show loading/error message
+                    return (
+                      <div className="text-center py-8" style={{ color: '#7A8B6F' }}>
+                        <p className="mb-2">Price data loading...</p>
+                        {marketData && marketData.market_data ? (
+                          <p className="text-xs">Source: {marketData.market_data.source || 'Fetching data...'}</p>
+                        ) : (
+                          <p className="text-xs">Click "Refresh Data" button to fetch latest price trends.</p>
+                        )}
+                      </div>
+                    );
+                  })()}
+                </div>
 
                 <div className="p-4 rounded-lg mb-4" style={{ backgroundColor: '#D4C9B0' }}>
                   <h5 className="font-semibold mb-2" style={{ color: '#5A6B4F' }}>Investment Requirements:</h5>

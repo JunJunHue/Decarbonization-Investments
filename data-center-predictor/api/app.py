@@ -1,20 +1,27 @@
 """
 Flask API for data center demand predictions
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 import sys
 import os
+import json
 
 # Add parent directories to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from data_collectors.data_aggregator import DataAggregator
 from data_collectors.material_data_collector import MaterialDataCollector
+from data_collectors.ticker_collector import TickerCollector
+from data_collectors.ticker_registry import TICKER_UNIVERSE, SECTOR_LABELS, DEMAND_WEIGHTS, THEMATIC_SIGNALS
 from ml_model.predictor import Predictor
 from ml_model.train_model import DataCenterDemandPredictor
+from ml_model.monte_carlo import MonteCarloSimulator, simulation_result_to_dict, SCENARIOS
 import pandas as pd
 from datetime import datetime
+import schedule
+import threading
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +29,7 @@ CORS(app)
 # Initialize components
 aggregator = DataAggregator()
 material_collector = MaterialDataCollector()
+ticker_collector = TickerCollector()
 predictor = None
 
 def load_predictor():
@@ -141,7 +149,7 @@ def predict():
 
 @app.route('/api/predict-future', methods=['POST'])
 def predict_future():
-    """Predict future demand"""
+    """Predict future demand (monthly forecasts)"""
     if predictor is None:
         return jsonify({
             'status': 'error',
@@ -149,7 +157,9 @@ def predict_future():
         }), 400
     
     try:
-        days_ahead = request.json.get('days', 30) if request.json else 30
+        # Accept months instead of days
+        months_ahead = request.json.get('months', 6) if request.json else 6
+        days_ahead = months_ahead * 30  # Convert months to approximate days for prediction
         
         # Load latest data
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -166,13 +176,32 @@ def predict_future():
         df['date'] = pd.to_datetime(df['date'])
         df.set_index('date', inplace=True)
         
-        # Make future predictions
-        predictions = predictor.predict_future(df, days_ahead=days_ahead)
+        # Make future predictions (daily granularity internally)
+        daily_predictions = predictor.predict_future(df, days_ahead=days_ahead)
+        
+        # Aggregate to monthly predictions
+        monthly_predictions = []
+        if daily_predictions:
+            # Group predictions by month
+            df_pred = pd.DataFrame(daily_predictions)
+            df_pred['date'] = pd.to_datetime(df_pred['date'])
+            df_pred.set_index('date', inplace=True)
+            
+            # Resample to monthly, taking the last value of each month (or average)
+            monthly_df = df_pred.resample('M').last().reset_index()
+            
+            # Convert to list of dicts
+            for _, row in monthly_df.iterrows():
+                monthly_predictions.append({
+                    'date': row['date'].strftime('%Y-%m-%d'),
+                    'predicted_demand': float(row['predicted_demand']),
+                    'month': row['date'].strftime('%B %Y')
+                })
         
         return jsonify({
             'status': 'success',
-            'predictions': predictions,
-            'days_ahead': days_ahead,
+            'predictions': monthly_predictions,
+            'months_ahead': months_ahead,
             'timestamp': datetime.now().isoformat()
         })
     except Exception as e:
@@ -191,21 +220,36 @@ def get_material_data():
         result = {}
         for material_id, data in materials_data.items():
             if data:
-                metrics = material_collector.calculate_investment_metrics(data)
+                # Pass material_id to calculate_investment_metrics for news scraping
+                metrics = material_collector.calculate_investment_metrics(data, material_id)
                 result[material_id] = {
                     'market_data': data,
                     'investment_metrics': metrics
                 }
             else:
-                # Default values if data unavailable
-                result[material_id] = {
-                    'market_data': None,
-                    'investment_metrics': {
-                        'investment_gap': 100,
-                        'recent_funding': 25,
-                        'market_sentiment': 'neutral'
+                # Try to get news-based metrics even without market data
+                news_metrics = material_collector.get_news_based_metrics(material_id)
+                if news_metrics:
+                    result[material_id] = {
+                        'market_data': None,
+                        'investment_metrics': {
+                            'investment_gap': news_metrics.get('investment_gap', 85),
+                            'recent_funding': news_metrics.get('recent_funding', 15),
+                            'market_sentiment': 'positive' if news_metrics.get('recent_funding', 0) > 20 else 'neutral',
+                            'source': 'news_scraping'
+                        }
                     }
-                }
+                else:
+                    # Default values if data unavailable
+                    result[material_id] = {
+                        'market_data': None,
+                        'investment_metrics': {
+                            'investment_gap': 100,
+                            'recent_funding': 25,
+                            'market_sentiment': 'neutral',
+                            'source': 'default'
+                        }
+                    }
         
         return jsonify({
             'status': 'success',
@@ -248,5 +292,212 @@ def get_latest_data():
             'message': str(e)
         }), 500
 
+@app.route('/api/tickers', methods=['GET'])
+def get_tickers():
+    """Return all tracked tickers with live price data, organised by sector."""
+    try:
+        sector = request.args.get('sector')
+        period = request.args.get('period', '3mo')
+        force = request.args.get('force', 'false').lower() == 'true'
+
+        if sector:
+            data = ticker_collector.fetch_sector(sector, period=period)
+        else:
+            data = ticker_collector.fetch_all(period=period, force_refresh=force)
+
+        sector_momentum = ticker_collector.compute_sector_momentum(data)
+        thematic_signals = ticker_collector.compute_thematic_signals(data)
+        demand_index = ticker_collector.compute_demand_index(data)
+
+        return jsonify({
+            'status': 'success',
+            'tickers': data,
+            'sector_momentum': sector_momentum,
+            'thematic_signals': thematic_signals,
+            'demand_index': demand_index,
+            'sector_labels': SECTOR_LABELS,
+            'ticker_count': len(data),
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/tickers/<symbol>', methods=['GET'])
+def get_ticker(symbol: str):
+    """Return detail for a single ticker."""
+    try:
+        period = request.args.get('period', '3mo')
+        data = ticker_collector.fetch_all(period=period)
+        ticker_data = data.get(symbol.upper())
+        if not ticker_data:
+            return jsonify({'status': 'error', 'message': f'Ticker {symbol} not found'}), 404
+        return jsonify({'status': 'success', 'ticker': ticker_data, 'timestamp': datetime.now().isoformat()})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/sector-momentum', methods=['GET'])
+def get_sector_momentum():
+    """Return 30d momentum score per sector and thematic signals."""
+    try:
+        data = ticker_collector.fetch_all()
+        sector_momentum = ticker_collector.compute_sector_momentum(data)
+        thematic_signals = ticker_collector.compute_thematic_signals(data)
+        demand_index = ticker_collector.compute_demand_index(data)
+        return jsonify({
+            'status': 'success',
+            'sector_momentum': sector_momentum,
+            'thematic_signals': thematic_signals,
+            'demand_index': demand_index,
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/correlation-matrix', methods=['GET'])
+def get_correlation_matrix():
+    """Return correlation matrix of demand driver tickers."""
+    try:
+        period = request.args.get('period', '1y')
+        hist = ticker_collector.get_historical_for_simulation(period=period)
+        if hist.empty:
+            return jsonify({'status': 'error', 'message': 'No historical data'}), 500
+
+        corr = hist.corr()
+        tickers = list(corr.columns)
+        matrix = corr.values.tolist()
+
+        return jsonify({
+            'status': 'success',
+            'tickers': tickers,
+            'matrix': matrix,
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/simulate', methods=['POST'])
+def simulate():
+    """
+    Run Monte Carlo simulation for data center demand.
+    Body: { months_ahead: int, n_simulations: int, scenario: str }
+    """
+    try:
+        body = request.json or {}
+        months_ahead = int(body.get('months_ahead', 12))
+        n_simulations = int(body.get('n_simulations', 10000))
+        scenario = body.get('scenario', 'base')
+
+        hist = ticker_collector.get_historical_for_simulation(period='1y')
+        if hist.empty:
+            return jsonify({'status': 'error', 'message': 'No historical data for simulation'}), 500
+
+        simulator = MonteCarloSimulator(n_simulations=n_simulations)
+        result = simulator.simulate(hist, months_ahead=months_ahead, scenario=scenario)
+
+        return jsonify({
+            'status': 'success',
+            'simulation': simulation_result_to_dict(result),
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/simulate-scenarios', methods=['POST'])
+def simulate_scenarios():
+    """
+    Run all 6 pre-built scenarios and return results for comparison.
+    Body: { months_ahead: int, n_simulations: int }
+    """
+    try:
+        body = request.json or {}
+        months_ahead = int(body.get('months_ahead', 12))
+        n_simulations = int(body.get('n_simulations', 5000))  # lower default for speed
+
+        hist = ticker_collector.get_historical_for_simulation(period='1y')
+        if hist.empty:
+            return jsonify({'status': 'error', 'message': 'No historical data for simulation'}), 500
+
+        simulator = MonteCarloSimulator(n_simulations=n_simulations)
+        all_results = simulator.simulate_all_scenarios(hist, months_ahead=months_ahead)
+
+        return jsonify({
+            'status': 'success',
+            'scenarios': {
+                name: simulation_result_to_dict(res)
+                for name, res in all_results.items()
+            },
+            'scenario_descriptions': {k: v['description'] for k, v in SCENARIOS.items()},
+            'months_ahead': months_ahead,
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/stream', methods=['GET'])
+def stream():
+    """
+    Server-Sent Events endpoint for real-time ticker price updates.
+    Pushes updates every 60 seconds.
+    """
+    def generate():
+        while True:
+            try:
+                data = ticker_collector.fetch_all()
+                demand_index = ticker_collector.compute_demand_index(data)
+                sector_momentum = ticker_collector.compute_sector_momentum(data)
+                payload = {
+                    'type': 'ticker_update',
+                    'demand_index': demand_index,
+                    'sector_momentum': sector_momentum,
+                    'ticker_count': len(data),
+                    'timestamp': datetime.now().isoformat(),
+                }
+                yield f"data: {json.dumps(payload)}\n\n"
+            except Exception as e:
+                yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+            time.sleep(60)
+
+    return Response(generate(), mimetype='text/event-stream',
+                    headers={'Cache-Control': 'no-cache', 'X-Accel-Buffering': 'no'})
+
+
+def run_scheduled_tasks():
+    """Run scheduled tasks in background thread"""
+    def job():
+        """Daily news scraping job"""
+        print(f"[{datetime.now()}] Running daily news scrape for investment data...")
+        try:
+            # Trigger news scraping by calling get_news_based_metrics for each material
+            # This will update the cache if it's a new day
+            for material_id in ['steel', 'cement', 'aluminum', 'copper', 'rare_earths']:
+                material_collector.get_news_based_metrics(material_id)
+            print(f"[{datetime.now()}] Daily news scrape completed successfully")
+        except Exception as e:
+            print(f"[{datetime.now()}] Error in daily news scrape: {e}")
+    
+    # Schedule daily news scraping at 2 AM
+    schedule.every().day.at("02:00").do(job)
+    
+    # Also run immediately on startup to populate initial data
+    job()
+    
+    # Run scheduler in background thread
+    def run_scheduler():
+        while True:
+            schedule.run_pending()
+            time.sleep(60)  # Check every minute
+    
+    scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
+    scheduler_thread.start()
+    print("Scheduled tasks initialized: Daily news scraping at 2:00 AM")
+
 if __name__ == '__main__':
+    # Start scheduled tasks
+    run_scheduled_tasks()
     app.run(debug=True, port=5001)

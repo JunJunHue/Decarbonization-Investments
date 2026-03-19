@@ -35,28 +35,28 @@ const StakesSection: React.FC = () => {
       description: 'Failure to act exposes companies to escalating future carbon costs and compliance burdens.',
       example: 'New York City\'s Local Law 97 (effective Jan 2024) imposes significant penalties on large buildings exceeding emissions limits.',
       icon: AlertTriangle,
-      color: 'text-red-600'
+      color: '#C4B89A'
     },
     {
       title: 'Higher Long-Term Costs',
       description: 'Delaying investment in green materials can paradoxically lead to increased costs later.',
       example: 'Forcing companies to pay for expensive offsets or procure scarce, high-cost low-carbon inputs when regulations become unavoidable.',
       icon: DollarSign,
-      color: 'text-red-600'
+      color: '#C4B89A'
     },
     {
       title: 'Loss of Talent & Culture Erosion',
       description: 'Companies visibly lagging in sustainability efforts may struggle to attract and retain top-tier talent.',
       example: 'A 2023 Deloitte survey indicated over 40% of Gen Z and Millennials are willing to change jobs due to corporate climate stance.',
       icon: Users,
-      color: 'text-red-600'
+      color: '#C4B89A'
     },
     {
       title: 'Reputational Damage',
       description: 'Intensifying scrutiny over corporate climate claims means perceived "greenwashing" can severely erode brand trust.',
       example: 'Leading to public backlash, boycotts, and negative press that impact market capitalization.',
       icon: AlertTriangle,
-      color: 'text-red-600'
+      color: '#C4B89A'
     }
   ];
 
@@ -112,7 +112,7 @@ const StakesSection: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Costs of Inaction */}
           <motion.div 
-            className="bg-red-50 p-8 rounded-lg border-l-4 border-red-500"
+            className="p-8 rounded-lg border-l-4" style={{ backgroundColor: '#F5F3ED', borderColor: '#C4B89A' }}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
