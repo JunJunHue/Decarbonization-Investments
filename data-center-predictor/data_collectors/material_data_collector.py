@@ -291,21 +291,29 @@ class MaterialDataCollector:
         return None
     
     def fetch_all_materials(self):
-        """Fetch data for all materials"""
+        """Fetch data for all materials in parallel."""
         print("Collecting material market data...")
-        
-        materials_data = {
-            'steel': self.fetch_steel_data(),
-            'cement': self.fetch_cement_data(),
-            'aluminum': self.fetch_aluminum_data(),
-            'copper': self.fetch_copper_data(),
-            'rare_earths': self.fetch_rare_earths_data()
+
+        fetchers = {
+            'steel': self.fetch_steel_data,
+            'cement': self.fetch_cement_data,
+            'aluminum': self.fetch_aluminum_data,
+            'copper': self.fetch_copper_data,
+            'rare_earths': self.fetch_rare_earths_data,
         }
-        
-        # Add small delay between requests
-        time.sleep(0.5)
-        
-        return materials_data
+
+        results = {}
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(fn): name for name, fn in fetchers.items()}
+            for future in as_completed(futures):
+                name = futures[future]
+                try:
+                    results[name] = future.result()
+                except Exception as e:
+                    print(f"Error fetching {name}: {e}")
+                    results[name] = None
+
+        return results
     
     def get_news_based_metrics(self, material_id: str) -> Dict:
         """Get investment metrics from news scraping (cached daily)"""

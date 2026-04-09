@@ -218,10 +218,7 @@ class DataCenterDemandPredictor:
             
             # Save model
             model_path = os.path.join(self.model_dir, f"{name}_model.pkl")
-            if name in ['xgboost', 'lightgbm']:
-                joblib.dump(model, model_path)
-            else:
-                joblib.dump(model, model_path)
+            joblib.dump(model, model_path)
             
             self.models[name] = model
             

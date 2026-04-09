@@ -17,6 +17,8 @@ from data_collectors.ticker_registry import TICKER_UNIVERSE, SECTOR_LABELS, DEMA
 from ml_model.predictor import Predictor
 from ml_model.train_model import DataCenterDemandPredictor
 from ml_model.monte_carlo import MonteCarloSimulator, simulation_result_to_dict, SCENARIOS
+from ml_model.material_requirements import compute_requirements_for_scenario, MATERIAL_INTENSITY, MATERIAL_ORDER
+from ml_model.fund_sizing import compute_fund_sizing, build_narrative
 import pandas as pd
 from datetime import datetime
 import schedule
@@ -276,7 +278,6 @@ def get_latest_data():
                 'message': 'No data available. Please collect data first.'
             }), 404
         
-        import json
         with open(json_file, 'r') as f:
             data = json.load(f)
         
@@ -465,6 +466,108 @@ def stream():
 
     return Response(generate(), mimetype='text/event-stream',
                     headers={'Cache-Control': 'no-cache', 'X-Accel-Buffering': 'no'})
+
+
+@app.route('/api/material-requirements', methods=['POST'])
+def material_requirements():
+    """
+    Run Monte Carlo simulation then translate demand index paths into
+    specific material requirements (steel, cement, aluminum, copper, rare earths).
+
+    Body: { months_ahead: int, n_simulations: int, scenario: str }
+    Returns demand projections in GW + annual material tons + dollar value.
+    """
+    try:
+        body = request.json or {}
+        months_ahead = int(body.get('months_ahead', 24))
+        n_simulations = int(body.get('n_simulations', 5000))
+        scenario = body.get('scenario', 'base')
+
+        hist = ticker_collector.get_historical_for_simulation(period='1y')
+        if hist.empty:
+            return jsonify({'status': 'error', 'message': 'No historical data for simulation'}), 500
+
+        simulator = MonteCarloSimulator(n_simulations=n_simulations)
+        result = simulator.simulate(hist, months_ahead=months_ahead, scenario=scenario)
+
+        p50_path = result.percentiles['p50']
+        reqs = compute_requirements_for_scenario(p50_path, scenario=scenario, months=result.dates)
+
+        fund = compute_fund_sizing(reqs['materials'])
+        narrative = build_narrative(fund, scenario=scenario, annual_new_builds_gw=reqs['annual_new_builds_gw'])
+
+        return jsonify({
+            'status': 'success',
+            'demand_projection': {
+                'scenario': scenario,
+                'months': result.dates,
+                'gw_path': reqs['gw_path'],
+                'gw_baseline': reqs['gw_baseline'],
+                'annual_new_builds_gw': reqs['annual_new_builds_gw'],
+                'demand_index_p50': p50_path,
+                'demand_index_p25': result.percentiles['p25'],
+                'demand_index_p75': result.percentiles['p75'],
+            },
+            'material_requirements': reqs['materials'],
+            'fund_sizing': fund,
+            'narrative': narrative,
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/api/material-requirements/all-scenarios', methods=['POST'])
+def material_requirements_all_scenarios():
+    """
+    Run all 6 scenarios and return material requirements + fund sizing for each.
+    Body: { months_ahead: int, n_simulations: int }
+    """
+    try:
+        body = request.json or {}
+        months_ahead = int(body.get('months_ahead', 24))
+        n_simulations = int(body.get('n_simulations', 3000))
+
+        hist = ticker_collector.get_historical_for_simulation(period='1y')
+        if hist.empty:
+            return jsonify({'status': 'error', 'message': 'No historical data'}), 500
+
+        simulator = MonteCarloSimulator(n_simulations=n_simulations)
+        all_mc = simulator.simulate_all_scenarios(hist, months_ahead=months_ahead)
+
+        scenarios_out = {}
+        for sc_name, result in all_mc.items():
+            p50 = result.percentiles['p50']
+            reqs = compute_requirements_for_scenario(p50, scenario=sc_name, months=result.dates)
+            fund = compute_fund_sizing(reqs['materials'])
+            narrative = build_narrative(fund, scenario=sc_name, annual_new_builds_gw=reqs['annual_new_builds_gw'])
+            scenarios_out[sc_name] = {
+                'description': result.description,
+                'gw_path': reqs['gw_path'],
+                'annual_new_builds_gw': reqs['annual_new_builds_gw'],
+                'material_requirements': reqs['materials'],
+                'fund_sizing': fund,
+                'narrative': narrative,
+            }
+
+        return jsonify({
+            'status': 'success',
+            'months': list(all_mc.values())[0].dates,
+            'gw_baseline': 100.0,
+            'scenarios': scenarios_out,
+            'material_intensity': {
+                mat: {
+                    'total_tons_per_mw': MATERIAL_INTENSITY[mat]['total'],
+                    'description': MATERIAL_INTENSITY[mat]['description'],
+                    'current_price_per_ton': MATERIAL_INTENSITY[mat]['current_price_per_ton'],
+                    'green_premium_per_ton': MATERIAL_INTENSITY[mat]['green_premium_per_ton'],
+                }
+                for mat in MATERIAL_ORDER
+            },
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
 def run_scheduled_tasks():

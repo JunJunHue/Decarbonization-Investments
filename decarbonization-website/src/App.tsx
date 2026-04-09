@@ -8,6 +8,7 @@ import SolutionsSection from './components/SolutionsSection';
 import PlayersSection from './components/PlayersSection';
 import StrategySection from './components/StrategySection';
 import DataCenterPredictor from './components/DataCenterPredictor';
+import FundJustification from './components/FundJustification';
 import TickerDashboard from './components/TickerDashboard';
 import Footer from './components/Footer';
 
@@ -24,6 +25,7 @@ function App() {
         <StrategySection />
         <TickerDashboard />
         <DataCenterPredictor />
+        <FundJustification />
       </main>
       <Footer />
     </div>
