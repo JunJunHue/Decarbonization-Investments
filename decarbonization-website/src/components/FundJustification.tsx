@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   ComposedChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend, ResponsiveContainer, Cell,
+  Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import { TrendingUp, Zap, Package, DollarSign, RefreshCw, AlertTriangle } from 'lucide-react';
 
